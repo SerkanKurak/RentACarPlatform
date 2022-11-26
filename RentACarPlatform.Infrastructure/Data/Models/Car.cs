@@ -70,22 +70,22 @@ namespace RentACarPlatform.Infrastructure.Data.Models
         [Required]
         public bool Availability { get; set; }
 
-     //  [Required]
-     //  [ForeignKey(nameof(Location))]
-     //  public int LocationId { get; set; }
-     //
-     //  public Location Location { get; set; } = null!;
-     //
-     //  [Required]
-     //  [ForeignKey(nameof(Category))]
-     //  public int CategoryId { get; set; }
-     //
-     //  public CarCategory Category { get; set; } = null!;
-     //
-     //  [Required]
-     //  [ForeignKey(nameof(Purpose))]
-     //  public int PurposeId { get; set; }
-     //
-     //  public CarPurpose Purpose { get; set; } = null!;
+        [Required]
+        [ForeignKey(nameof(Location))]
+        public int LocationId { get; set; }
+      
+        public Location Location { get; set; } = null!;
+      
+        [Required]
+        [ForeignKey(nameof(Category))]
+        public int CategoryId { get; set; }
+      
+        public CarCategory Category { get; set; } = null!;
+      
+        [Required]
+        [ForeignKey(nameof(Purpose))]
+        public int PurposeId { get; set; }
+      
+        public CarPurpose Purpose { get; set; } = null!;
     }
 }

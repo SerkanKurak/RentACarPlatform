@@ -2,7 +2,7 @@
 {
     public static class DataConstants
     {
-        public static class CarCategories
+        public static class CarCategory
         {
             public const int NameMaxLength = 10;
         }
@@ -62,7 +62,7 @@
 
         }
 
-        public static class Locations
+        public static class Location
         {
             public const int NameMaxLength = 30;
         }
@@ -76,7 +76,7 @@
             public const int CountryNameMaxLength = 60;
         }
 
-        public static class Protections
+        public static class Protection
         {
             public const int NameMaxLength = 8;
 
