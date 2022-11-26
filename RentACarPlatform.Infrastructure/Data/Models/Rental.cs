@@ -22,12 +22,12 @@ namespace RentACarPlatform.Infrastructure.Data.Models
         public ApplicationUser User { get; set; } = null!;
 
 
-        public int? PickUpLocationId { get; set; }
+        public int PickUpLocationId { get; set; }
 
         public Location PickUpLocation { get; set; } = null!;
 
 
-        public int? DropOffLocationId { get; set; }
+        public int DropOffLocationId { get; set; }
 
         public Location DropOffLocation { get; set; } = null!;
 
