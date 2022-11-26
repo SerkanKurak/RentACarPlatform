@@ -6,11 +6,9 @@ namespace RentACarPlatform.Infrastructure.Data.Models
 {
     public class Location
     {
-        [InverseProperty(nameof(Rental.PickUpLocation))]
-        public ICollection<Rental> PickUpRental { get; set; } = null!;
+        public List<Rental> PickUpRental { get; set; }
 
-        [InverseProperty(nameof(Rental.DropOffLocation))]
-        public ICollection<Rental> DropOffRental { get; set; } = null!;
+        public List<Rental> DropOffRental { get; set; }
 
 
         [Key]

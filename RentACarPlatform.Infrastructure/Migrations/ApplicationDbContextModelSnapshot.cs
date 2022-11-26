@@ -403,13 +403,15 @@ namespace RentACarPlatform.Infrastructure.Migrations
                     b.Property<int>("CarId")
                         .HasColumnType("int");
 
-                    b.Property<int>("DropOffLocationId")
+                    b.Property<int?>("DropOffLocationId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DropOffTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PickUpLocationId")
+                    b.Property<int?>("PickUpLocationId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<DateTime>("PickUpTime")
@@ -549,13 +551,11 @@ namespace RentACarPlatform.Infrastructure.Migrations
                     b.HasOne("RentACarPlatform.Infrastructure.Data.Models.Location", "DropOffLocation")
                         .WithMany("DropOffRental")
                         .HasForeignKey("DropOffLocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("RentACarPlatform.Infrastructure.Data.Models.Location", "PickUpLocation")
                         .WithMany("PickUpRental")
                         .HasForeignKey("PickUpLocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("RentACarPlatform.Infrastructure.Data.Models.ApplicationUser", "User")

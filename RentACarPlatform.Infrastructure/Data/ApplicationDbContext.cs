@@ -18,13 +18,13 @@ namespace RentACarPlatform.Infrastructure.Data
                  .HasOne(r => r.DropOffLocation)
                  .WithMany(r => r.DropOffRental)
                  .HasForeignKey(r => r.DropOffLocationId)
-                 .OnDelete(DeleteBehavior.SetNull);
+                 .OnDelete(DeleteBehavior.ClientSetNull);
         
               modelBuilder.Entity<Rental>()
              .HasOne(r => r.PickUpLocation)
              .WithMany(r => r.PickUpRental)
              .HasForeignKey(r => r.PickUpLocationId)
-             .OnDelete(DeleteBehavior.SetNull); 
+             .OnDelete(DeleteBehavior.ClientSetNull); 
 
             base.OnModelCreating(modelBuilder);
         }
@@ -41,5 +41,7 @@ namespace RentACarPlatform.Infrastructure.Data
         public DbSet<CarPurpose> CarPurposes { get; set; }
         
         public DbSet<CarCategory> CarCategories { get; set; }
+
+        public DbSet<ApplicationUser> Users { get; set; }
     }
 }
