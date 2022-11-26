@@ -2,17 +2,17 @@
 {
     public static class DataConstants
     {
-        public static class CarCategory
+        public static class CarCategoryData
         {
             public const int NameMaxLength = 10;
         }
 
-        public static class CarPurpose
+        public static class CarPurposeData
         {
             public const int NameMaxLength = 20;
         }
 
-        public static class Car
+        public static class CarData
         {
             public const int MakeMinLength = 2;
             public const int MakeMaxLength = 20;
@@ -62,12 +62,12 @@
 
         }
 
-        public static class Location
+        public static class LocationData
         {
             public const int NameMaxLength = 30;
         }
 
-        public static class ApplicationUser        
+        public static class ApplicationUserData
         {
             public const int FirstNameMaxLength = 20;
 
@@ -76,7 +76,7 @@
             public const int CountryNameMaxLength = 60;
         }
 
-        public static class Protection
+        public static class ProtectionData
         {
             public const int NameMaxLength = 8;
 
