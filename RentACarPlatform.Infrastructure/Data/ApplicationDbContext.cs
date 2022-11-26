@@ -12,17 +12,19 @@ namespace RentACarPlatform.Infrastructure.Data
         }
 
          protected override void OnModelCreating(ModelBuilder modelBuilder)
-         {         
-        
-             modelBuilder.Entity<Rental>()
+         {
+            
+            modelBuilder.Entity<Rental>()
                  .HasOne(r => r.DropOffLocation)
                  .WithMany(r => r.DropOffRental)
-                 .HasForeignKey(r => r.DropOffLocationId);
+                 .HasForeignKey(r => r.DropOffLocationId)
+                 .OnDelete(DeleteBehavior.SetNull);
         
               modelBuilder.Entity<Rental>()
              .HasOne(r => r.PickUpLocation)
              .WithMany(r => r.PickUpRental)
-             .HasForeignKey(r => r.PickUpLocationId);
+             .HasForeignKey(r => r.PickUpLocationId)
+             .OnDelete(DeleteBehavior.SetNull); 
 
             base.OnModelCreating(modelBuilder);
         }
