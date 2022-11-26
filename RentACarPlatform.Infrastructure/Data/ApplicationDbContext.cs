@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace RentACarPlatform.Data
+namespace RentACarPlatform.Infrastructure.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
