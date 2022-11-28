@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using RentACarPlatform.Infrastructure.Data.Configurations;
 using RentACarPlatform.Infrastructure.Data.Models;
 
 namespace RentACarPlatform.Infrastructure.Data
@@ -24,24 +25,27 @@ namespace RentACarPlatform.Infrastructure.Data
              .HasOne(r => r.PickUpLocation)
              .WithMany(r => r.PickUpRental)
              .HasForeignKey(r => r.PickUpLocationId)
-             .OnDelete(DeleteBehavior.ClientSetNull); 
+             .OnDelete(DeleteBehavior.ClientSetNull);
+
+
+            modelBuilder.ApplyConfiguration(new CarCategoryConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
 
-        public DbSet<Car> Cars { get; set; }
+        public DbSet<Car> Cars { get; set; } = null!;
 
-        public DbSet<Rental> Rentals { get; set; }
-        
-        public DbSet<Protection> Protections { get; set; }
-        
-        public DbSet<Location> Locations { get; set; }
-        
-        
-        public DbSet<CarPurpose> CarPurposes { get; set; }
-        
-        public DbSet<CarCategory> CarCategories { get; set; }
+        public DbSet<Rental> Rentals { get; set; } = null!;
 
-        public DbSet<ApplicationUser> Users { get; set; }
+        public DbSet<Protection> Protections { get; set; } = null!;
+
+        public DbSet<Location> Locations { get; set; } = null!;
+
+
+        public DbSet<CarPurpose> CarPurposes { get; set; } = null!;
+
+        public DbSet<CarCategory> CarCategories { get; set; } = null!;
+
+        public DbSet<ApplicationUser> Users { get; set; } = null!;
     }
 }
