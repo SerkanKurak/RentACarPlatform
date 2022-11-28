@@ -30,7 +30,7 @@ namespace RentACarPlatform.Infrastructure.Data.Models
         public string Gearbox { get; set; } = null!;
 
         [Required]
-        public DateTime Year { get; set; }
+        public string Year { get; set; } = null!;
 
         [Required]
         [Range(DoorsMinCount, DoorsMaxCount)]

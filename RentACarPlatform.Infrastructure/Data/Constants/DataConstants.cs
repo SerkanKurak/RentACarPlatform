@@ -54,11 +54,11 @@
             public const int MaxCubage = 6000;
 
 
-            public const decimal MinPricePerDay = 20;
-            public const decimal MaxPricePerDay = 200;
+            public const decimal MinPricePerDay = 50;
+            public const decimal MaxPricePerDay = 1000;
 
 
-            public const int MaxImageUrlLenght = 200;
+            public const int MaxImageUrlLenght = 250;
 
         }
 
