@@ -58,6 +58,12 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Name = "Ван"
                 },
 
+                new CarCategory()
+                {
+                    Id = 8,
+                    Name = "Хечбег"
+                },
+
         };
 
             return categories;
