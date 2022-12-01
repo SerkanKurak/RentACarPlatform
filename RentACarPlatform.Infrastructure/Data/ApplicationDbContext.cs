@@ -32,6 +32,7 @@ namespace RentACarPlatform.Infrastructure.Data
             modelBuilder.ApplyConfiguration(new CarPurposeConfiguration());
             modelBuilder.ApplyConfiguration(new LocationConfiguration());
             modelBuilder.ApplyConfiguration(new CarConfiguration());
+            modelBuilder.ApplyConfiguration(new ProtectionConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
