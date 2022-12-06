@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using RentACarPlatform.Contracts;
 using RentACarPlatform.Infrastructure.Data;
-using RentACarPlatform.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,8 +21,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddControllersWithViews();
-
-builder.Services.AddScoped<IHomeService, HomeService>();
+builder.Services.AddApplicationServices();
 
 
 var app = builder.Build();

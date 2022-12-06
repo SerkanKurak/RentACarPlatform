@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RentACarPlatform.Contracts;
+using RentACarPlatform.Core.Contracts;
 using RentACarPlatform.Models;
 using System.Diagnostics;
 
@@ -7,12 +7,18 @@ namespace RentACarPlatform.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ICarService carService;
 
-              
-        public IActionResult Index()
+        public HomeController(ICarService _carService)
         {
-          
-            return View();
+            carService = _carService;
+        }
+              
+        public async Task<IActionResult> Index()
+        {
+            var model = await carService.AllCars();
+
+            return View(model);
         }
      
 
