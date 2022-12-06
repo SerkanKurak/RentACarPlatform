@@ -12,8 +12,8 @@ using RentACarPlatform.Infrastructure.Data;
 namespace RentACarPlatform.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221201115800_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20221206105528_InitialMigrationAndSeedDb")]
+    partial class InitialMigrationAndSeedDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

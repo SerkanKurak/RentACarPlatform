@@ -59,8 +59,7 @@ namespace RentACarPlatform.Infrastructure.Data.Models
         [Range(MinCubage, MaxCubage)]
         public int Cubage { get; set; }
 
-        [Required]
-        [Range(typeof(decimal), "20", "200")]
+        [Required]       
         public decimal PricePerDay { get; set; }
 
         [Required]
