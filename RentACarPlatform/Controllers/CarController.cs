@@ -40,16 +40,33 @@ namespace RentACarPlatform.Controllers
         }
 
         [HttpGet]
-        public IActionResult Add()
+        public async Task<IActionResult> Add()
         {
+            var model = new CarModel()
+            {
+                CarCategories = await carService.AllCategories()
+            };
 
-            return View();
+            return View(model);
         }
 
         [HttpPost]
         public async Task<IActionResult> Add(CarModel model)
         {
-            int id = 1;
+            if ((await carService.CategoryExist(model.CategoryId)) == false)
+            {
+                ModelState.AddModelError(nameof(model.CategoryId), "Category does not exist!");
+            }
+
+
+            if (!ModelState.IsValid)
+            {
+                model.CarCategories = await carService.AllCategories();
+
+                return View(model);
+            }
+
+            int id = await carService.Create(model);
 
             return RedirectToAction(nameof(Specifications), new { id });
         }

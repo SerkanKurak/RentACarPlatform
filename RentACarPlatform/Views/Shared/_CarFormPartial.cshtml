@@ -1,0 +1,98 @@
+﻿@model CarModel
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <input type="hidden" asp-for="@Model.CategoryId" />
+            <div class="form-group">
+                <label asp-for="Make"></label>
+                <input asp-for="Make" class="form-control" placeholder="Make...">
+                <span asp-validation-for="Make" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Model"></label>
+                <input asp-for="Model" class="form-control" placeholder="Model...">
+                <span asp-validation-for="Model" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FuelType"></label>
+                <textarea asp-for="FuelType" rows="4" class="form-control" placeholder="FuelType..."></textarea>
+                <span asp-validation-for="FuelType" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Gearbox"></label>
+                <textarea asp-for="Gearbox" rows="4" class="form-control" placeholder="Gearbox..."></textarea>
+                <span asp-validation-for="Gearbox" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Year"></label>
+                <textarea asp-for="Year" rows="4" class="form-control" placeholder="Year..."></textarea>
+                <span asp-validation-for="Year" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Doors"></label>
+                <textarea asp-for="Doors" rows="4" class="form-control" placeholder="Doors..."></textarea>
+                <span asp-validation-for="Doors" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Seats"></label>
+                <textarea asp-for="Seats" rows="4" class="form-control" placeholder="Seats..."></textarea>
+                <span asp-validation-for="Seats" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TankCapacity"></label>
+                <textarea asp-for="TankCapacity" rows="4" class="form-control" placeholder="TankCapacity..."></textarea>
+                <span asp-validation-for="TankCapacity" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FuelConsumption"></label>
+                <textarea asp-for="FuelConsumption" rows="4" class="form-control" placeholder="FuelConsumption..."></textarea>
+                <span asp-validation-for="FuelConsumption" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TrunkVolume"></label>
+                <textarea asp-for="TrunkVolume" rows="4" class="form-control" placeholder="TrunkVolume..."></textarea>
+                <span asp-validation-for="TrunkVolume" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Horsepower"></label>
+                <textarea asp-for="Horsepower" rows="4" class="form-control" placeholder="Horsepower..."></textarea>
+                <span asp-validation-for="Horsepower" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cubage"></label>
+                <textarea asp-for="Cubage" rows="4" class="form-control" placeholder="Cubage..."></textarea>
+                <span asp-validation-for="Cubage" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUrl"></label>
+                <input asp-for="ImageUrl" class="form-control" placeholder="Your fine URL here...">
+                <span asp-validation-for="ImageUrl" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Availability"></label>
+                <textarea asp-for="Availability" rows="4" class="form-control" placeholder="Availability..."></textarea>
+                <span asp-validation-for="Availability" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PricePerDay"></label>
+                <input asp-for="PricePerDay" class="form-control">
+                <span asp-validation-for="PricePerDay" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoryId"></label>
+                <select asp-for="CategoryId" class="form-control">
+                    @foreach (var category in Model.CarCategories)
+                    {
+                        <option value="@category.Id">@category.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="CategoryId" class="small text-danger"></span>
+            </div>
+
+            <div class="text-center">
+                <input class="btn btn-primary mt-3" type="submit" value="Save" />
+            </div>
+        </form>
+    </div>
+</div>

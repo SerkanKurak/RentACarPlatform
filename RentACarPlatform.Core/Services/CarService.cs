@@ -27,5 +27,50 @@ namespace RentACarPlatform.Core.Services
                    })
                    .ToListAsync();
         }
+
+        public async Task<IEnumerable<CarCategoryModel>> AllCategories()
+        {
+            return await repo.AllReadonly<CarCategory>()
+                .Select(c => new CarCategoryModel()
+                {
+                    Id = c.Id,
+                    Name = c.Name                   
+                })
+                .ToListAsync();
+        }
+
+        public async Task<bool> CategoryExist(int categoryId)
+        {
+            return await repo.AllReadonly<CarCategory>()
+                  .AnyAsync(c => c.Id == categoryId);
+        }
+
+        public async Task<int> Create(CarModel model)
+        {
+            var car = new Car()
+            {
+                Make = model.Make,
+                Model = model.Model,
+                FuelType = model.FuelType,
+                Gearbox = model.Gearbox,
+                Year = model.Year,
+                Doors = model.Doors,
+                Seats = model.Seats,
+                TankCapacity = model.TankCapacity,
+                FuelConsumption = model.FuelConsumption,
+                TrunkVolume = model.TrunkVolume,
+                Horsepower = model.Horsepower,
+                Cubage = model.Cubage,
+                PricePerDay = model.PricePerDay,
+                ImageUrl = model.ImageUrl,
+                Availability = model.Availability,
+                CategoryId = model.CategoryId,
+            };
+
+            await repo.AddAsync(car);
+            await repo.SaveChangesAsync();
+
+            return car.Id;
+        }
     }
 }
