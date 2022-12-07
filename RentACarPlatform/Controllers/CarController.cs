@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RentACarPlatform.Core.Contracts;
 using RentACarPlatform.Core.Models.Car;
 
 namespace RentACarPlatform.Controllers
@@ -7,6 +8,14 @@ namespace RentACarPlatform.Controllers
     [Authorize]
     public class CarController : Controller
     {
+        private readonly ICarService carService;
+
+        public CarController(ICarService _carService)
+        {
+            carService = _carService;
+        }
+
+
         [AllowAnonymous]
         public async Task<IActionResult> All()
         {
