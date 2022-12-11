@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RentACarPlatform.Core.Contracts;
 using RentACarPlatform.Core.Models.Car;
+using RentACarPlatform.Models;
 
 namespace RentACarPlatform.Controllers
 {
@@ -15,13 +16,22 @@ namespace RentACarPlatform.Controllers
             carService = _carService;
         }
 
-
+        [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All([FromQuery]AllCarsQueryModel query)
         {
-            var model = new CarsQueryModel();
+            var result = await carService.All(
+                query.Category,
+                query.SearchTerm,
+                query.Sorting,
+                query.CurrentPage,
+                AllCarsQueryModel.CarsOnPage);
 
-            return View(model);
+            query.TotalCarsCount = result.TotalCarsCount;
+            query.Categories = await carService.AllCategoriesNames();
+            query.Cars = result.Cars;
+
+            return View(query);
         }
 
         public async Task<IActionResult> Mine()
