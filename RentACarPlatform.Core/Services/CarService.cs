@@ -31,19 +31,28 @@ namespace RentACarPlatform.Core.Services
                 searchTerm = $"%{searchTerm.ToLower()}%";
 
                 cars = cars
-                    .Where(h => EF.Functions.Like(h.Make.ToLower(), searchTerm) ||
-                        EF.Functions.Like(h.Model.ToLower(), searchTerm));
-                    
+                    .Where(c => EF.Functions.Like(c.Make.ToLower(), searchTerm) ||
+                        EF.Functions.Like(c.Model.ToLower(), searchTerm));
+                       
+
             }
 
-            cars = sorting switch
+            switch (sorting)
             {
-                CarSorting.Price => cars
-                    .OrderBy(c => c.PricePerDay),
-                CarSorting.NotRentedFirst =>
-                    cars.OrderByDescending(c => c.Id)
-            };
+                case CarSorting.Price:
+                    cars = cars
+                    .OrderBy(c => c.PricePerDay);
+                    break;
+                case CarSorting.NotRentedFirst:
+                    cars = cars
+                    .OrderBy(c => c.Id);
+                    break;
+                default:
+                    cars = cars.OrderByDescending(c => c.Id);
+                    break;
+            }
 
+            
             result.Cars = await cars
                .Skip((currPage - 1) * carsOnPage)
                .Take(carsOnPage)
