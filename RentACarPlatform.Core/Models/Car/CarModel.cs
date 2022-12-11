@@ -57,7 +57,7 @@ namespace RentACarPlatform.Core.Models.Car
 
         [Required]
         [Display(Name = "Price per day")]
-        [Range(50.00, 1000.00)]
+        [Range(50.00, 1000.00, ErrorMessage = "Price per day must be more than {1} and less than {2} leva")]
         public decimal PricePerDay { get; set; }
 
         [Required]

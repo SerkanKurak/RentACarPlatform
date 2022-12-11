@@ -26,6 +26,7 @@ builder.Services.AddControllersWithViews()
        {       
            options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
        });
+
 builder.Services.AddApplicationServices();
 
 
