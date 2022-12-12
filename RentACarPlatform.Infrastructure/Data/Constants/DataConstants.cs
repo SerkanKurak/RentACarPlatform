@@ -54,7 +54,7 @@
             public const int MaxCubage = 6000;
 
 
-            public const int MaxImageUrlLenght = 250;
+            public const int MaxImageUrlLenght = 300;
 
         }
 

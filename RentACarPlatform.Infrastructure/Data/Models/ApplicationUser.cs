@@ -4,21 +4,20 @@ using static RentACarPlatform.Infrastructure.Data.Constants.DataConstants.Applic
 
 namespace RentACarPlatform.Infrastructure.Data.Models
 {
-    public class ApplicationUser : IdentityUser
+    public class ApplicationUser : IdentityUser<string>
     {
         
-        [Required]
+       
         [MaxLength(FirstNameMaxLength)]
-        public string FirstName { get; set; } = null!;
+        public string? FirstName { get; set; } 
 
-        [Required]
+
         [MaxLength(LastNameMaxLength)]
-        public string LastName { get; set; } = null!;
+        public string? LastName { get; set; } 
 
-
-        [Required]
+    
         [MaxLength(CountryNameMaxLength)]
-        public string CountryName { get; set; } = null!;
+        public string? CountryName { get; set; } 
 
         [Required]
         public DateTime BirthDate { get; set; }

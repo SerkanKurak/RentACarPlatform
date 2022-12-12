@@ -21,5 +21,7 @@ namespace RentACarPlatform.Core.Contracts
 
 
         Task<IEnumerable<string>> AllCategoriesNames();
+
+        Task<IEnumerable<CarServiceModel>> AllCarsByUserId(string userId);
     }
 }
