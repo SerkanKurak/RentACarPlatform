@@ -14,14 +14,26 @@
                  src="@Model.ImageUrl" alt="Car Image">
         </div>
         <div class="card col-8 border-0">
-            <p style="font-size:25px;"><u>@Model.Make</u></p>
-            <p>Located in: <b>@Model.Location.Name</b></p>
+            <p style="font-size:25px;"><u>@Model.Make</u></p>                      
+            <p>Марка: <b>@Model.Make</b></p>
+            <p>Модел: <b>@Model.Model</b></p>
+            <p>Гориво: <b>@Model.FuelType</b></p>
+            <p>Скорости: <b>@Model.Gearbox</b></p>
+            <p>Година: <b>@Model.Year</b></p>
+            <p>Брой врати: <b>@Model.Doors</b></p>
+            <p>Брой места: <b>@Model.Seats</b></p>
+            <p>Обем на резервоар: <b>@Model.TankCapacity L</b></p>
+            <p>Разход на гориво: <b>@Model.FuelConsumption</b></p>
+            <p>Обем на багажника: <b>@Model.TrunkVolume</b></p>
+            <p>Конски сили: <b>@Model.Horsepower</b></p>
+            <p>Кубатура: <b>@Model.Cubage</b></p>
             <p>
-                Price Per Month:
-                <b>@String.Format("{0:f2}", Model.PricePerDay) BGN</b>
+                Цена на ден:
+                <b>@String.Format("{0:f2}", Model.PricePerDay) Лева</b>
             </p>
-            <p>@Model.Model</p>
-            <p>Category: <b>@Model.Category.Name</b></p>
+            <p>Категория: <b>@Model.Category.Name</b></p>
+            <p>Намира се в: <b>@Model.Location.Name</b></p>
+            <p>Предназначение: <b>@Model.Purpose.Name</b></p>
             <p><i>(@(Model.IsRented ? "Rented" : "Not Rented"))</i></p>
             <div class="form-inline">
                 @if (this.User.Identity.IsAuthenticated)

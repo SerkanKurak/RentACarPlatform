@@ -67,7 +67,7 @@ namespace RentACarPlatform.Infrastructure.Data.Models
         public string ImageUrl { get; set; } = null!;
 
         [Required]
-        public bool Availability { get; set; }
+        public bool Availability { get; set; } = true;
 
         [Required]
         [ForeignKey(nameof(Location))]

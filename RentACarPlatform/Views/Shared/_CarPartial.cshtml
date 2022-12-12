@@ -5,10 +5,10 @@
         <img class="card-img-top" src="@Model.ImageUrl" alt="Car Image">
         <div class="card-body text-center">
             <h4>@Model.Make</h4>
-            <h6>Model: <b>@Model.Model</b></h6>
+            <h6>Модел: <b>@Model.Model</b></h6>
             <h6>
-                Price Per Day:
-                <b>@String.Format("{0:f2}", Model.PricePerDay) BGN</b>
+                Цена на ден:
+                <b>@String.Format("{0:f2}", Model.PricePerDay) Лева</b>
             </h6>
             <h6>(@(Model.IsRented ? "Rented" : "Not Rented"))</h6>
             <br />

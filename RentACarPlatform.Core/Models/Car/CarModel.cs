@@ -5,6 +5,8 @@ namespace RentACarPlatform.Core.Models.Car
 {
     public class CarModel
     {
+        public int Id { get; set; }
+
         [Required]
         [MaxLength(MakeMaxLength)]
         [MinLength(MakeMinLength)]
@@ -56,17 +58,17 @@ namespace RentACarPlatform.Core.Models.Car
         public int Cubage { get; set; }
 
         [Required]
-        [Display(Name = "Price per day")]
-        [Range(50.00, 1000.00, ErrorMessage = "Price per day must be more than {1} and less than {2} leva")]
+        [Display(Name = "Цена на ден")]
+        [Range(50.00, 1000.00, ErrorMessage = "Цената трябва да бъфе по-вече от {1} и по-малко от {2} leva")]
         public decimal PricePerDay { get; set; }
+
+        [Required]
+        public bool Availability { get; set; }
 
         [Required]
         [MaxLength(MaxImageUrlLenght)]
         [Display(Name = "Image URL")]
-        public string ImageUrl { get; set; } = null!;
-
-        [Required]
-        public bool Availability { get; set; }
+        public string ImageUrl { get; set; } = null!;    
 
         [Required]
         [Display(Name = "Category")]

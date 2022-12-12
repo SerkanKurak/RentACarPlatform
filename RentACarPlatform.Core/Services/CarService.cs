@@ -174,8 +174,7 @@ namespace RentACarPlatform.Core.Services
                Horsepower = model.Horsepower,
                Cubage = model.Cubage,
                PricePerDay = model.PricePerDay,
-               ImageUrl = model.ImageUrl,
-               Availability = model.Availability,
+               ImageUrl = model.ImageUrl,             
                CategoryId = model.CategoryId,
            };
    
@@ -184,6 +183,40 @@ namespace RentACarPlatform.Core.Services
    
            return car.Id;
        }
+
+        public Task Delete(int carId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task Edit(int carId, CarModel model)
+        {
+            var car = await repo.GetByIdAsync<Car>(carId);
+
+            car.Make = model.Make;
+            car.Model = model.Model;
+            car.FuelType = model.FuelType;
+            car.Gearbox = model.Gearbox;
+            car.Year = model.Year;
+            car.Seats = model.Seats;
+            car.Doors = model.Doors;
+            car.TankCapacity = model.TankCapacity;
+            car.FuelConsumption = model.FuelConsumption;
+            car.TrunkVolume = model.TrunkVolume;
+            car.Horsepower = model.Horsepower;
+            car.Cubage = model.Cubage;
+            car.PricePerDay = model.PricePerDay;
+            car.ImageUrl = model.ImageUrl;
+            car.Availability = model.Availability;
+            car.CategoryId = model.CategoryId;
+
+            await repo.SaveChangesAsync();
+        }
+
+        public async Task<int> GetCarCategoryId(int carId)
+        {
+            return (await repo.GetByIdAsync<Car>(carId)).CategoryId;
+        }
 
         public async Task<bool> IsExist(int id)
         {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Microsoft.VisualBasic;
 using RentACarPlatform.Core.Contracts;
 using RentACarPlatform.Core.Models.Car;
@@ -94,7 +95,33 @@ namespace RentACarPlatform.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var model = new CarModel();
+            if ((await carService.IsExist(id)) == false)
+            {
+                return RedirectToAction(nameof(All));
+            }
+            
+            var car = await carService.CarSpecificationsById(id);
+            var categoryId = await carService.GetCarCategoryId(id);
+
+            var model = new CarModel()
+            {
+               Id = id,
+               Make = car.Make,
+               Model = car.Model,
+               FuelType = car.FuelType,
+               Gearbox = car.Gearbox,
+               Year = car.Year,
+               Seats = car.Seats,
+               Doors = car.Doors,
+               TankCapacity = car.TankCapacity,
+               FuelConsumption = car.FuelConsumption,
+               TrunkVolume = car.TrunkVolume,
+               Horsepower = car.Horsepower,
+               Cubage = car.Cubage,
+               PricePerDay = car.PricePerDay,
+               ImageUrl = car.ImageUrl,          
+               CategoryId = categoryId
+        };
 
             return View(model);
         }
@@ -102,7 +129,29 @@ namespace RentACarPlatform.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, CarModel model)
         {
-            return RedirectToAction(nameof(Specifications), new { id });
+            if (id != model.Id)
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+               
+            if ((await carService.CategoryExist(model.CategoryId)) == false)
+            {
+                ModelState.AddModelError(nameof(model.CategoryId), "Category does not exist");
+                model.CarCategories = await carService.AllCategories();
+
+                return View(model);
+            }
+
+            if (ModelState.IsValid == false)
+            {
+                model.CarCategories = await carService.AllCategories();
+
+                return View(model);
+            }
+
+            await carService.Edit(model.Id, model);
+
+            return RedirectToAction(nameof(Specifications), new { model.Id });
         }      
 
         [HttpPost]

@@ -28,5 +28,11 @@ namespace RentACarPlatform.Core.Contracts
 
         Task<bool> IsExist(int id);
 
+        Task Edit(int carId, CarModel model);
+
+        Task<int> GetCarCategoryId(int carId);
+
+        Task Delete(int carId);
+
     }
 }
