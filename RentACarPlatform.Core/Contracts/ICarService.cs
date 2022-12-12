@@ -23,5 +23,10 @@ namespace RentACarPlatform.Core.Contracts
         Task<IEnumerable<string>> AllCategoriesNames();
 
         Task<IEnumerable<CarServiceModel>> AllCarsByUserId(string userId);
+         
+        Task<CarSpecificationsModel>  CarSpecificationsById(int id);
+
+        Task<bool> IsExist(int id);
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 using RentACarPlatform.Core.Contracts;
 using RentACarPlatform.Core.Models.Car;
 using RentACarPlatform.Models;
@@ -36,15 +37,24 @@ namespace RentACarPlatform.Controllers
 
         public async Task<IActionResult> Mine()
         {
-            var model = new CarsQueryModel();
+            IEnumerable<CarServiceModel> myCars;
 
-            return View(model);
+            var userId = User.Claims.ToString();
+
+            myCars = await carService.AllCarsByUserId(userId);
+
+            return View(myCars);
         }
 
         [AllowAnonymous]
         public async Task<IActionResult> Specifications(int id)
         {
-            var model = new CarSpecificationsModel();
+            if (!(await carService.IsExist(id)))
+            {
+                return RedirectToAction(nameof(All));
+            }
+
+            var model = await carService.CarSpecificationsById(id);          
 
             return View(model);
         }

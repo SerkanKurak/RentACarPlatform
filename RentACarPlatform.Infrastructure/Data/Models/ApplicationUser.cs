@@ -6,8 +6,7 @@ namespace RentACarPlatform.Infrastructure.Data.Models
 {
     public class ApplicationUser : IdentityUser<string>
     {
-        
-       
+               
         [MaxLength(FirstNameMaxLength)]
         public string? FirstName { get; set; } 
 

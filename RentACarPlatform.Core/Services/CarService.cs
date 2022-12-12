@@ -92,15 +92,13 @@ namespace RentACarPlatform.Core.Services
                 .Where(c => c.RenterId == userId)
                 .Where(c => c.Availability)
                 .Select(c => new CarServiceModel()
-                {
-                    
+                {                  
                    Id = c.Id,
                    Make = c.Make,
                    Model = c.Model,
                    ImageUrl = c.ImageUrl,
                    IsRented = c.RenterId != null,
-                   PricePerDay = c.PricePerDay,
-                   
+                   PricePerDay = c.PricePerDay,                   
                })
                 .ToListAsync();
          }
@@ -123,8 +121,37 @@ namespace RentACarPlatform.Core.Services
                .Distinct()
                .ToListAsync();
        }
-   
-       public async Task<bool> CategoryExist(int categoryId)
+
+        public async Task<CarSpecificationsModel> CarSpecificationsById(int id)
+        {
+            return await repo.AllReadonly<Car>()
+                   .Where(c => c.Id == id)
+                   .Select(c => new CarSpecificationsModel()
+                   {
+                       Id = c.Id,
+                       Make = c.Make,
+                       Model = c.Model,
+                       ImageUrl = c.ImageUrl,
+                       PricePerDay = c.PricePerDay,
+                       IsRented = c.Availability, //c.RenterId != null
+                       FuelType = c.FuelType,
+                       Gearbox = c.Gearbox,
+                       Year = c.Year,
+                       Doors = c.Doors,
+                       Seats = c.Seats,
+                       TankCapacity = c.TankCapacity,
+                       FuelConsumption = c.FuelConsumption,
+                       TrunkVolume = c.TrunkVolume,
+                       Horsepower = c.Horsepower,
+                       Cubage = c.Cubage,
+                       Category = c.Category,
+                       Purpose = c.Purpose,
+                       Location = c.Location,                                         
+                   })
+                   .FirstAsync();
+        }
+
+        public async Task<bool> CategoryExist(int categoryId)
        {
            return await repo.AllReadonly<CarCategory>()
                  .AnyAsync(c => c.Id == categoryId);
@@ -157,5 +184,10 @@ namespace RentACarPlatform.Core.Services
    
            return car.Id;
        }
-   }
+
+        public async Task<bool> IsExist(int id)
+        {
+            return await repo.AllReadonly<Car>().AnyAsync(c => c.Id == id);              
+        }
+    }
 }

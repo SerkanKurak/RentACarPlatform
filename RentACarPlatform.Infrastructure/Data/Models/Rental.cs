@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static RentACarPlatform.Infrastructure.Data.Constants.DataConstants;
 
 namespace RentACarPlatform.Infrastructure.Data.Models
 {
