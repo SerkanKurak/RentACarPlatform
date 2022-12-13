@@ -92,5 +92,7 @@ namespace RentACarPlatform.Infrastructure.Data.Models
         public string? RenterId { get; set; }
     
         public ApplicationUser? Renter { get; set; }
+
+        public bool IsActive { get; set; } = true;
     }
 }

@@ -7,6 +7,10 @@ namespace RentACarPlatform.Models
 
         public const int CarsOnPage = 3;
 
+        public CarPickUpLocation PickUpLocation { get; set; }
+
+        //public string? DropOffLocation { get; set; }
+
         public string? Category { get; set; }
 
         public string? SearchTerm { get; set; }

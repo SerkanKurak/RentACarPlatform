@@ -24,6 +24,7 @@ namespace RentACarPlatform.Controllers
         {
             var result = await carService.All(
                 query.Category,
+                //query.PickUpLocation.ToString(),               
                 query.SearchTerm,
                 query.Sorting,
                 query.CurrentPage,
@@ -152,11 +153,38 @@ namespace RentACarPlatform.Controllers
             await carService.Edit(model.Id, model);
 
             return RedirectToAction(nameof(Specifications), new { model.Id });
-        }      
+        }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
+            if ((await carService.IsExist(id)) == false)
+            {
+                return RedirectToAction(nameof(All));
+            }          
+
+            var car = await carService.CarSpecificationsById(id);
+            var model = new CarSpecificationsViewModel()
+            {
+                Make = car.Make,
+                Model = car.Model,
+                ImageUrl = car.ImageUrl
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id, CarSpecificationsViewModel model)
+        {
+            if ((await carService.IsExist(id)) == false)
+            {
+                return RedirectToAction(nameof(All));
+            }
+          
+
+            await carService.Delete(id);
+
             return RedirectToAction(nameof(All));
         }
 

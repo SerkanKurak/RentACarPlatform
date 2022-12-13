@@ -15,6 +15,7 @@ namespace RentACarPlatform.Core.Contracts
         Task<CarsQueryModel> All(
              string? category = null,
              string? searchTerm = null,
+             // CarPickUpLocation carPickUpLocation = CarPickUpLocation.СофияОфис,
              CarSorting sorting = CarSorting.Newest,
              int currPage = 1,
              int carsOnPage = 1);

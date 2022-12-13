@@ -3,6 +3,7 @@ using RentACarPlatform.Core.Contracts;
 using RentACarPlatform.Core.Models.Car;
 using RentACarPlatform.Infrastructure.Data.Common;
 using RentACarPlatform.Infrastructure.Data.Models;
+using System.Xml.Linq;
 
 namespace RentACarPlatform.Core.Services
 {
@@ -14,10 +15,12 @@ namespace RentACarPlatform.Core.Services
        {
            repo = _repo;
        }
-   
-       public async Task<CarsQueryModel> All(string? category = null, string? searchTerm = null, CarSorting sorting = CarSorting.Newest, int currPage = 1, int carsOnPage = 1)
+
+        //CarPickUpLocation carPickUpLocation = CarPickUpLocation.СофияОфис
+        public async Task<CarsQueryModel> All(string? category = null, string? searchTerm = null, CarSorting sorting = CarSorting.Newest, int currPage = 1, int carsOnPage = 1)
        {
-           var cars = repo.AllReadonly<Car>();
+           var cars = repo.AllReadonly<Car>()
+                          .Where(c => c.IsActive);
    
            var result = new CarsQueryModel();
    
@@ -33,11 +36,54 @@ namespace RentACarPlatform.Core.Services
                cars = cars
                    .Where(c => EF.Functions.Like(c.Make.ToLower(), searchTerm) ||
                        EF.Functions.Like(c.Model.ToLower(), searchTerm));
-                      
    
            }
-   
-           switch (sorting)
+
+           //switch (carPickUpLocation)
+           //{
+           //    case CarPickUpLocation.СофияОфис:
+           //         cars = cars
+           //         .OrderBy(c => c.Location); //.Name == "София - Офис"
+           //        break;
+           //    case CarPickUpLocation.СофияИзбранОтВасАдрес:
+           //        cars = cars
+           //        .OrderBy(c => c.Location); //.Name == "София - Избран от вас адрес"
+           //         break;
+           //    case CarPickUpLocation.СофияЛетищеТерминал1:
+           //        cars = cars
+           //        .OrderBy(c => c.Location); //.Name == "София - Летище Терминал 1"
+           //         break;
+           //    case CarPickUpLocation.СофияЛетищеТерминал2:
+           //        cars = cars
+           //        .OrderBy(c => c.Location); //.Name == "София - Летище Терминал 2"
+           //         break;
+           //            case CarPickUpLocation.ВарнаОфис:
+           //         cars = cars
+           //        .OrderBy(c => c.Location);//.Name == "Варна - Офис"
+           //        break;
+           //    case CarPickUpLocation.ВарнаИзбранОтВасАдрес:
+           //        cars = cars
+           //        .OrderBy(c => c.Location);//.Name == "Варна - Избран от вас адрес"
+           //         break;
+           //    case CarPickUpLocation.ВарнаЛетище:
+           //        cars = cars
+           //        .OrderBy(c => c.Location);//.Name == "Варна - Летище"
+           //         break;
+           //    case CarPickUpLocation.ПловдивОфис:
+           //        cars = cars
+           //        .OrderBy(c => c.Location);//.Name == "Пловдив - Офис"
+           //         break;
+           //    case CarPickUpLocation.ПловдивИзбранОтВасАдрес:
+           //        cars = cars
+           //        .OrderBy(c => c.Location);//.Name == "Пловдив - Избран от вас адрес"
+           //         break;
+           //    case CarPickUpLocation.ПловдивЛетище:
+           //        cars = cars
+           //        .OrderBy(c => c.Location);//.Name == "Пловдив - Летище"
+           //         break;
+           //}
+
+            switch (sorting)
            {
                case CarSorting.Price:
                    cars = cars
@@ -76,6 +122,7 @@ namespace RentACarPlatform.Core.Services
        public async Task<IEnumerable<CarHomeModel>> AllCars()
        {
            return await repo.AllReadonly<Car>()
+                  .Where(c => c.IsActive)
                   .Select(c => new CarHomeModel()
                   {
                       Id = c.Id,
@@ -91,6 +138,7 @@ namespace RentACarPlatform.Core.Services
             return await repo.AllReadonly<Car>()
                 .Where(c => c.RenterId == userId)
                 .Where(c => c.Availability)
+                .Where(c => c.IsActive)
                 .Select(c => new CarServiceModel()
                 {                  
                    Id = c.Id,
@@ -126,6 +174,7 @@ namespace RentACarPlatform.Core.Services
         {
             return await repo.AllReadonly<Car>()
                    .Where(c => c.Id == id)
+                   .Where(c => c.IsActive)
                    .Select(c => new CarSpecificationsModel()
                    {
                        Id = c.Id,
@@ -184,9 +233,12 @@ namespace RentACarPlatform.Core.Services
            return car.Id;
        }
 
-        public Task Delete(int carId)
+        public async Task Delete(int carId)
         {
-            throw new NotImplementedException();
+            var car = await repo.GetByIdAsync<Car>(carId);
+            car.IsActive = false;
+
+            await repo.SaveChangesAsync();
         }
 
         public async Task Edit(int carId, CarModel model)
@@ -220,7 +272,7 @@ namespace RentACarPlatform.Core.Services
 
         public async Task<bool> IsExist(int id)
         {
-            return await repo.AllReadonly<Car>().AnyAsync(c => c.Id == id);              
+            return await repo.AllReadonly<Car>().AnyAsync(c => c.Id == id && c.IsActive);              
         }
     }
 }
