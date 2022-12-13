@@ -57,9 +57,6 @@
 </div>
 <div class="mb-5"></div>
 <div class="row">
-    <div class="col-12 text-center">
-        <button class="btn btn-primary" id="specifications-button">Show Specifications</button>
-    </div>
 </div>
 
 <div class="mt-4 p-5 bg-light d-none" id="specifications">
@@ -73,7 +70,7 @@
         $('#specifications-button').on('click', ev => {
             $.get('https://localhost:7035/api/specifications', (data) => {
                 $('#total-cars').text(data.totalHouses + "Cars");
-                $('#total-rents').text(data.totalRents + " Rents");
+                $('#total-rents').text(data.totalRents + "Rents");
                 $('#specifications').removeClass('d-none');
                 $('#specifications-button').hide();
             });
