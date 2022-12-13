@@ -15,13 +15,18 @@ namespace RentACarPlatform.Core.Contracts
         Task<CarsQueryModel> All(
              string? category = null,
              string? searchTerm = null,
-             // CarPickUpLocation carPickUpLocation = CarPickUpLocation.СофияОфис,
+             string? pickUpLocation = null,
+             string? dropOffLocation = null,
              CarSorting sorting = CarSorting.Newest,
              int currPage = 1,
              int carsOnPage = 1);
 
 
         Task<IEnumerable<string>> AllCategoriesNames();
+
+        Task<IEnumerable<string>> AllPickUpLocations();
+
+        Task<IEnumerable<string>> AllDropOffLocations();
 
         Task<IEnumerable<CarServiceModel>> AllCarsByUserId(string userId);
          
@@ -34,6 +39,14 @@ namespace RentACarPlatform.Core.Contracts
         Task<int> GetCarCategoryId(int carId);
 
         Task Delete(int carId);
+
+        Task<bool> IsRented(int carId);
+
+        Task<bool> IsRentedByUserWithId(int carId, string currentUserId);
+
+        Task Rent(int carId, string currentUserId);
+
+        Task Leave(int carId);
 
     }
 }

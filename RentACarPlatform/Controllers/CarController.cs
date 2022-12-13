@@ -24,7 +24,8 @@ namespace RentACarPlatform.Controllers
         {
             var result = await carService.All(
                 query.Category,
-                //query.PickUpLocation.ToString(),               
+                query.PickUpLocation,
+                query.DropOffLocation,
                 query.SearchTerm,
                 query.Sorting,
                 query.CurrentPage,
@@ -32,6 +33,8 @@ namespace RentACarPlatform.Controllers
 
             query.TotalCarsCount = result.TotalCarsCount;
             query.Categories = await carService.AllCategoriesNames();
+            query.PickUpLocations = await carService.AllPickUpLocations();
+            query.DropOffLocations = await carService.AllDropOffLocations();
             query.Cars = result.Cars;
 
             return View(query);
@@ -191,12 +194,38 @@ namespace RentACarPlatform.Controllers
         [HttpPost]
         public async Task<IActionResult> Rent(int id)
         {
+            if ((await carService.IsExist(id)) == false)
+            {
+                return RedirectToAction(nameof(All));
+            }
+          
+
+            if (await carService.IsRented(id))
+            {
+                return RedirectToAction(nameof(All));
+            }
+
+            await carService.Rent(id, User.Identity.Name);
+
             return RedirectToAction(nameof(Mine));
         }
 
         [HttpPost]
         public async Task<IActionResult> Leave(int id)
         {
+            if ((await carService.IsExist(id)) == false ||
+                (await carService.IsRented(id)) == false)
+            {
+                return RedirectToAction(nameof(All));
+            }
+
+            if ((await carService.IsRentedByUserWithId(id, User.Identity.Name)) == false)
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+
+            await carService.Leave(id);
+
             return RedirectToAction(nameof(Mine));
         }
     }

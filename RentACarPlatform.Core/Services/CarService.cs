@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RentACarPlatform.Core.Contracts;
+using RentACarPlatform.Core.Exceptions;
 using RentACarPlatform.Core.Models.Car;
 using RentACarPlatform.Infrastructure.Data.Common;
 using RentACarPlatform.Infrastructure.Data.Models;
+using System;
 using System.Xml.Linq;
 
 namespace RentACarPlatform.Core.Services
@@ -10,14 +12,19 @@ namespace RentACarPlatform.Core.Services
    public class CarService : ICarService
    {
        private readonly IRepository repo;
-   
-       public CarService(IRepository _repo)
+
+       private readonly IGuard guard;
+
+        public CarService(
+               IRepository _repo,
+               IGuard _guard)
        {
            repo = _repo;
+           guard = _guard;
        }
 
-        //CarPickUpLocation carPickUpLocation = CarPickUpLocation.СофияОфис
-        public async Task<CarsQueryModel> All(string? category = null, string? searchTerm = null, CarSorting sorting = CarSorting.Newest, int currPage = 1, int carsOnPage = 1)
+        
+        public async Task<CarsQueryModel> All(string? category = null, string? searchTerm = null, string? pickUpLocation = null, string? dropOffLocation = null, CarSorting sorting = CarSorting.Newest, int currPage = 1, int carsOnPage = 1)
        {
            var cars = repo.AllReadonly<Car>()
                           .Where(c => c.IsActive);
@@ -39,49 +46,6 @@ namespace RentACarPlatform.Core.Services
    
            }
 
-           //switch (carPickUpLocation)
-           //{
-           //    case CarPickUpLocation.СофияОфис:
-           //         cars = cars
-           //         .OrderBy(c => c.Location); //.Name == "София - Офис"
-           //        break;
-           //    case CarPickUpLocation.СофияИзбранОтВасАдрес:
-           //        cars = cars
-           //        .OrderBy(c => c.Location); //.Name == "София - Избран от вас адрес"
-           //         break;
-           //    case CarPickUpLocation.СофияЛетищеТерминал1:
-           //        cars = cars
-           //        .OrderBy(c => c.Location); //.Name == "София - Летище Терминал 1"
-           //         break;
-           //    case CarPickUpLocation.СофияЛетищеТерминал2:
-           //        cars = cars
-           //        .OrderBy(c => c.Location); //.Name == "София - Летище Терминал 2"
-           //         break;
-           //            case CarPickUpLocation.ВарнаОфис:
-           //         cars = cars
-           //        .OrderBy(c => c.Location);//.Name == "Варна - Офис"
-           //        break;
-           //    case CarPickUpLocation.ВарнаИзбранОтВасАдрес:
-           //        cars = cars
-           //        .OrderBy(c => c.Location);//.Name == "Варна - Избран от вас адрес"
-           //         break;
-           //    case CarPickUpLocation.ВарнаЛетище:
-           //        cars = cars
-           //        .OrderBy(c => c.Location);//.Name == "Варна - Летище"
-           //         break;
-           //    case CarPickUpLocation.ПловдивОфис:
-           //        cars = cars
-           //        .OrderBy(c => c.Location);//.Name == "Пловдив - Офис"
-           //         break;
-           //    case CarPickUpLocation.ПловдивИзбранОтВасАдрес:
-           //        cars = cars
-           //        .OrderBy(c => c.Location);//.Name == "Пловдив - Избран от вас адрес"
-           //         break;
-           //    case CarPickUpLocation.ПловдивЛетище:
-           //        cars = cars
-           //        .OrderBy(c => c.Location);//.Name == "Пловдив - Летище"
-           //         break;
-           //}
 
             switch (sorting)
            {
@@ -169,6 +133,22 @@ namespace RentACarPlatform.Core.Services
                .Distinct()
                .ToListAsync();
        }
+
+        public async Task<IEnumerable<string>> AllDropOffLocations()
+        {
+            return await repo.AllReadonly<Location>()
+              .Select(c => c.Name)
+              .Distinct()
+              .ToListAsync();
+        }
+
+        public async Task<IEnumerable<string>> AllPickUpLocations()
+        {
+            return await repo.AllReadonly<Location>()
+              .Select(c => c.Name)
+              .Distinct()
+              .ToListAsync();
+        }
 
         public async Task<CarSpecificationsModel> CarSpecificationsById(int id)
         {
@@ -273,6 +253,52 @@ namespace RentACarPlatform.Core.Services
         public async Task<bool> IsExist(int id)
         {
             return await repo.AllReadonly<Car>().AnyAsync(c => c.Id == id && c.IsActive);              
+        }
+
+        public async Task<bool> IsRented(int carId)
+        {
+            return (await repo.GetByIdAsync<Car>(carId)).RenterId != null;
+        }
+
+        public async Task<bool> IsRentedByUserWithId(int carId, string currentUserId)
+        {
+            bool result = false;
+
+            var car = await repo.AllReadonly<Car>()
+                .Where(c => c.IsActive)
+                .Where(c => c.Id == carId)
+                .FirstOrDefaultAsync();
+
+            if (car != null && car.RenterId == currentUserId)
+            {
+                result = true;
+            }
+
+            return result;
+        }
+
+        public async Task Leave(int carId)
+        {
+            var car = await repo.GetByIdAsync<Car>(carId);
+            guard.AgainstNull(car, "Car can not be found");
+            car.RenterId = null;
+
+            await repo.SaveChangesAsync();
+        }
+
+        public async Task Rent(int carId, string currentUserId)
+        {
+            var car = await repo.GetByIdAsync<Car>(carId);
+
+            if (car != null && car.RenterId != null)
+            {
+                throw new ArgumentException("Car is already rented");
+            }
+
+            guard.AgainstNull(car, "Car can not be found");
+            car.RenterId = currentUserId;
+
+            await repo.SaveChangesAsync();
         }
     }
 }

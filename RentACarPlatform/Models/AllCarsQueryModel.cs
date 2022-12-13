@@ -7,9 +7,9 @@ namespace RentACarPlatform.Models
 
         public const int CarsOnPage = 3;
 
-        public CarPickUpLocation PickUpLocation { get; set; }
+        public string? PickUpLocation { get; set; }
 
-        //public string? DropOffLocation { get; set; }
+        public string? DropOffLocation { get; set; }
 
         public string? Category { get; set; }
 
@@ -20,6 +20,10 @@ namespace RentACarPlatform.Models
         public int CurrentPage { get; set; } = 1;
 
         public int TotalCarsCount { get; set; }
+
+        public IEnumerable<string> PickUpLocations { get; set; } = Enumerable.Empty<string>();
+
+        public IEnumerable<string> DropOffLocations { get; set; } = Enumerable.Empty<string>();
 
         public IEnumerable<string> Categories { get; set; } = Enumerable.Empty<string>();
 

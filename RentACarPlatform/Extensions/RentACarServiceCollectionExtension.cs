@@ -1,4 +1,5 @@
 ﻿using RentACarPlatform.Core.Contracts;
+using RentACarPlatform.Core.Exceptions;
 using RentACarPlatform.Core.Services;
 using RentACarPlatform.Infrastructure.Data.Common;
 
@@ -10,6 +11,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             services.AddScoped<IRepository, Repository>();
             services.AddScoped<ICarService, CarService>();
+            services.AddScoped<IGuard, Guard>();
 
             return services;
         }

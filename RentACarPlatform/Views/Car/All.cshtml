@@ -22,6 +22,35 @@
             </div>
         </div>
 
+
+        <div class="row">
+            <div class="form-group col-md-3 d-flex justify-content-between">
+                <div class="form-group">
+                    <label asp-for="PickUpLocation"></label>
+                    <select asp-for="PickUpLocation" class="form-control">
+                        <option value="">All</option>
+                        @foreach (var pickUpLocation in Model.PickUpLocations)
+                        {
+                            <option value="@pickUpLocation">@pickUpLocation</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-3 d-flex justify-content-between">
+                    <div class="form-group">
+                        <label asp-for="DropOffLocation"></label>
+                        <select asp-for="DropOffLocation" class="form-control">
+                            <option value="">All</option>
+                            @foreach (var dropOffLocation in Model.DropOffLocations)
+                            {
+                                <option value="@dropOffLocation">@dropOffLocation</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
         <div class="form-group col-md-3">
             <label asp-for="SearchTerm"></label>
             <input asp-for="SearchTerm" class="form-control" placeholder="...">
@@ -37,25 +66,7 @@
                 </select>            
             </div>
         </div>     
-        
-
-        <div class="form-group col-md-3">
-            <div class="form-group">
-                <label asp-for="PickUpLocation"></label>
-                <select asp-for="PickUpLocation" class="form-control">
-                    <option value="0">СофияОфис</option>
-                    <option value="1">СофияИзбранОтВасАдрес</option>
-                    <option value="2">СофияЛетищеТерминал1</option>
-                    <option value="3">СофияЛетищеТерминал2</option>
-                    <option value="4">ВарнаОфис</option>
-                    <option value="5">ВарнаИзбранОтВасАдрес</option>
-                    <option value="6">ВарнаЛетище</option>
-                    <option value="7">ПловдивОфис</option>
-                    <option value="8">ПловдивИзбранОтВасАдрес</option>
-                    <option value="9">ПловдивЛетище</option>
-                </select>
-            </div>
-        </div>
+               
    
         <div class="col-md-3">
             <div class="form-group mt-4 p-2">
