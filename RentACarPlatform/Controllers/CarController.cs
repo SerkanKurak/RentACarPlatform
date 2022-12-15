@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Microsoft.VisualBasic;
 using RentACarPlatform.Core.Contracts;
 using RentACarPlatform.Core.Models.Car;
+using RentACarPlatform.Extensions;
 using RentACarPlatform.Models;
 
 namespace RentACarPlatform.Controllers
@@ -13,9 +12,18 @@ namespace RentACarPlatform.Controllers
     {
         private readonly ICarService carService;
 
-        public CarController(ICarService _carService)
+        private readonly IAgentService agentService;
+
+        private readonly ILogger logger;
+
+        public CarController(
+               ICarService _carService,
+               IAgentService _agentService,
+               ILogger<CarController> _logger)
         {
             carService = _carService;
+            agentService = _agentService;
+            logger = _logger;
         }
 
         [HttpGet]
@@ -42,11 +50,24 @@ namespace RentACarPlatform.Controllers
 
         public async Task<IActionResult> Mine()
         {
+           //if (User.IsInRole(AdminRolleName))
+           //{
+           //    return RedirectToAction("Mine", "House", new { area = AreaName });
+           //}
+
             IEnumerable<CarServiceModel> myCars;
 
-            var userId = User.Claims.ToString();
+            var userId = User.Id();
 
-            myCars = await carService.AllCarsByUserId(userId);
+            if (await agentService.ExistById(userId))
+            {
+                int agentId = await agentService.GetAgentId(userId);
+                myCars = await carService.AllCarsByAgentId(agentId);
+            }
+            else
+            {
+                myCars = await carService.AllCarsByUserId(userId);
+            }
 
             return View(myCars);
         }
@@ -54,19 +75,24 @@ namespace RentACarPlatform.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Specifications(int id)
         {
-            if (!(await carService.IsExist(id)))
+            if ((await carService.IsExist(id)) == false)
             {
                 return RedirectToAction(nameof(All));
             }
 
-            var model = await carService.CarSpecificationsById(id);          
-
+            var model = await carService.CarSpecificationsById(id);
+           
             return View(model);
         }
 
         [HttpGet]
         public async Task<IActionResult> Add()
         {
+            if ((await agentService.ExistById(User.Id())) == false)
+            {
+                return RedirectToAction(nameof(AgentController.Become), "Agent");
+            }
+
             var model = new CarModel()
             {
                 CarCategories = await carService.AllCategories()
@@ -78,11 +104,15 @@ namespace RentACarPlatform.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(CarModel model)
         {
-            if ((await carService.CategoryExist(model.CategoryId)) == false)
+            if ((await agentService.ExistById(User.Id())) == false)
             {
-                ModelState.AddModelError(nameof(model.CategoryId), "Category does not exist!");
+                return RedirectToAction(nameof(AgentController.Become), "Agent");
             }
 
+            if ((await carService.CategoryExist(model.CategoryId)) == false)
+            {
+                ModelState.AddModelError(nameof(model.CategoryId), "Category does not exists");
+            }
 
             if (!ModelState.IsValid)
             {
@@ -91,7 +121,9 @@ namespace RentACarPlatform.Controllers
                 return View(model);
             }
 
-            int id = await carService.Create(model);
+            int agentId = await agentService.GetAgentId(User.Id());
+
+            int id = await carService.Create(model, agentId);
 
             return RedirectToAction(nameof(Specifications), new { id });
         }
@@ -103,7 +135,14 @@ namespace RentACarPlatform.Controllers
             {
                 return RedirectToAction(nameof(All));
             }
-            
+
+           // if ((await carService.HasAgentWithId(id, User.Id())) == false)
+           // {
+           //     logger.LogInformation("User with id {0} attempted to open other agent car", User.Id());
+           //
+           //     return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+           // }
+
             var car = await carService.CarSpecificationsById(id);
             var categoryId = await carService.GetCarCategoryId(id);
 
@@ -124,8 +163,9 @@ namespace RentACarPlatform.Controllers
                Cubage = car.Cubage,
                PricePerDay = car.PricePerDay,
                ImageUrl = car.ImageUrl,          
-               CategoryId = categoryId
-        };
+               CategoryId = categoryId,
+               CarCategories = await carService.AllCategories()
+            };
 
             return View(model);
         }
@@ -133,11 +173,24 @@ namespace RentACarPlatform.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, CarModel model)
         {
-            if (id != model.Id)
+            //if (id != model.Id)
+            //{
+            //    return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            //}
+
+            if ((await carService.IsExist(model.Id)) == false)
             {
-                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+                ModelState.AddModelError("", "Car does not exist");
+                model.CarCategories = await carService.AllCategories();
+
+                return View(model);
             }
-               
+
+           // if ((await carService.HasAgentWithId(model.Id, User.Id())) == false)
+           // {
+           //     return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+           // }
+
             if ((await carService.CategoryExist(model.CategoryId)) == false)
             {
                 ModelState.AddModelError(nameof(model.CategoryId), "Category does not exist");
@@ -155,7 +208,7 @@ namespace RentACarPlatform.Controllers
 
             await carService.Edit(model.Id, model);
 
-            return RedirectToAction(nameof(Specifications), new { model.Id });
+            return RedirectToAction(nameof(Specifications), new { id = model.Id });
         }
 
         [HttpGet]
@@ -164,7 +217,12 @@ namespace RentACarPlatform.Controllers
             if ((await carService.IsExist(id)) == false)
             {
                 return RedirectToAction(nameof(All));
-            }          
+            }
+
+           // if ((await carService.HasAgentWithId(id, User.Id())) == false)
+           // {
+           //     return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+           // }
 
             var car = await carService.CarSpecificationsById(id);
             var model = new CarSpecificationsViewModel()
@@ -184,7 +242,11 @@ namespace RentACarPlatform.Controllers
             {
                 return RedirectToAction(nameof(All));
             }
-          
+
+           //if ((await carService.HasAgentWithId(id, User.Id())) == false)
+           //{
+           //    return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+           //}
 
             await carService.Delete(id);
 
@@ -198,14 +260,19 @@ namespace RentACarPlatform.Controllers
             {
                 return RedirectToAction(nameof(All));
             }
-          
+
+            //!User.IsInRole(AdminRolleName) &&
+            //if (await agentService.ExistById(User.Id()))
+            //{
+            //    return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            //}
 
             if (await carService.IsRented(id))
             {
                 return RedirectToAction(nameof(All));
             }
 
-            await carService.Rent(id, User.Identity.Name);
+            await carService.Rent(id, User.Id());
 
             return RedirectToAction(nameof(Mine));
         }
@@ -219,10 +286,10 @@ namespace RentACarPlatform.Controllers
                 return RedirectToAction(nameof(All));
             }
 
-            if ((await carService.IsRentedByUserWithId(id, User.Identity.Name)) == false)
-            {
-                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
-            }
+           // if ((await carService.IsRentedByUserWithId(id, User.Id())) == false)
+           // {
+           //     return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+           // }
 
             await carService.Leave(id);
 

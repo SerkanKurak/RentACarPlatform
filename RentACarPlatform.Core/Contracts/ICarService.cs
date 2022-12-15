@@ -10,7 +10,7 @@ namespace RentACarPlatform.Core.Contracts
 
         Task<bool> CategoryExist(int categoryId);
 
-        Task<int> Create(CarModel model);
+        Task<int> Create(CarModel model, int agentId);
 
         Task<CarsQueryModel> All(
              string? category = null,
@@ -29,12 +29,16 @@ namespace RentACarPlatform.Core.Contracts
         Task<IEnumerable<string>> AllDropOffLocations();
 
         Task<IEnumerable<CarServiceModel>> AllCarsByUserId(string userId);
-         
+
+        Task<IEnumerable<CarServiceModel>> AllCarsByAgentId(int id);
+
         Task<CarSpecificationsModel>  CarSpecificationsById(int id);
 
         Task<bool> IsExist(int id);
 
         Task Edit(int carId, CarModel model);
+
+        Task<bool> HasAgentWithId(int carId, string currentUserId);
 
         Task<int> GetCarCategoryId(int carId);
 

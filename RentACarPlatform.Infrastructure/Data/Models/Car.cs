@@ -88,6 +88,13 @@ namespace RentACarPlatform.Infrastructure.Data.Models
         public CarPurpose Purpose { get; set; } = null!;
 
 
+        [Required]
+        [ForeignKey(nameof(Agent))]
+        public int AgentId { get; set; }
+
+        public Agent Agent { get; set; } = null!;
+
+
         [ForeignKey(nameof(Renter))]
         public string? RenterId { get; set; }
     

@@ -1,4 +1,5 @@
-﻿using RentACarPlatform.Infrastructure.Data.Models;
+﻿using RentACarPlatform.Core.Models.Agent;
+using RentACarPlatform.Infrastructure.Data.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -35,5 +36,6 @@ namespace RentACarPlatform.Core.Models.Car
 
         public Location Location { get; set; } = null!;
 
+        public AgentServiceModel Agent { get; set; } = null!;
     }
 }

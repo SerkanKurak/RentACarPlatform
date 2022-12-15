@@ -36,7 +36,9 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 1,
                     CategoryId = 1,
-                    PurposeId = 7
+                    PurposeId = 7,
+                    AgentId = 1,
+                    RenterId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e"
 
                 },
 
@@ -60,7 +62,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 1,
                     CategoryId = 1,
-                    PurposeId = 7
+                    PurposeId = 7,
+                    AgentId = 1
 
                 },
 
@@ -84,7 +87,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 1,
                     CategoryId = 1,
-                    PurposeId = 7
+                    PurposeId = 7,
+                    AgentId = 1
 
                 },
 
@@ -108,7 +112,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 1,
                     CategoryId = 3,
-                    PurposeId = 7
+                    PurposeId = 7,
+                    AgentId = 1
 
                 },
 
@@ -132,7 +137,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 1,
                     CategoryId = 3,
-                    PurposeId = 7
+                    PurposeId = 7,
+                    AgentId = 1
 
                 },
 
@@ -156,7 +162,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 1,
                     CategoryId = 3,
-                    PurposeId = 7
+                    PurposeId = 7,
+                    AgentId = 1
 
                 },
 
@@ -180,7 +187,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 1,
                     CategoryId = 5,
-                    PurposeId = 7
+                    PurposeId = 7,
+                    AgentId = 1
 
                 },
 
@@ -204,7 +212,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 1,
                     CategoryId = 1,
-                    PurposeId = 4
+                    PurposeId = 4,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -227,7 +236,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 1,
                     CategoryId = 2,
-                    PurposeId = 5
+                    PurposeId = 5,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -250,7 +260,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 1,
                     CategoryId = 2,
-                    PurposeId = 5
+                    PurposeId = 5,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -273,7 +284,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 1,
                     CategoryId = 6,
-                    PurposeId = 3
+                    PurposeId = 3,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -296,7 +308,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 1,
                     CategoryId = 3,
-                    PurposeId = 4
+                    PurposeId = 4,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -319,7 +332,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 1,
                     CategoryId = 6,
-                    PurposeId = 4
+                    PurposeId = 4,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -342,7 +356,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 1,
                     CategoryId = 5,
-                    PurposeId = 4
+                    PurposeId = 4,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -365,7 +380,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 1,
                     CategoryId = 2,
-                    PurposeId = 2
+                    PurposeId = 2,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -388,7 +404,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 2,
                     CategoryId = 4,
-                    PurposeId = 6
+                    PurposeId = 6,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -411,7 +428,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 2,
                     CategoryId = 2,
-                    PurposeId = 2
+                    PurposeId = 2,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -434,7 +452,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 2,
                     CategoryId = 3,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -457,7 +476,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 2,
                     CategoryId = 7,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -480,7 +500,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 2,
                     CategoryId = 8,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -503,7 +524,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 3,
                     CategoryId = 8,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -526,7 +548,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 3,
                     CategoryId = 8,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -549,7 +572,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 3,
                     CategoryId = 2,
-                    PurposeId = 2
+                    PurposeId = 2,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -572,7 +596,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 3,
                     CategoryId = 8,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -595,7 +620,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 3,
                     CategoryId = 8,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -618,7 +644,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 3,
                     CategoryId = 3,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -641,7 +668,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 3,
                     CategoryId = 3,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -664,7 +692,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 3,
                     CategoryId = 1,
-                    PurposeId = 4
+                    PurposeId = 4,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -687,7 +716,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 3,
                     CategoryId = 1,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -710,7 +740,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 3,
                     CategoryId = 8,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -733,7 +764,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 4,
                     CategoryId = 8,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -756,7 +788,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 4,
                     CategoryId = 3,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -779,7 +812,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 4,
                     CategoryId = 3,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -802,7 +836,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 4,
                     CategoryId = 3,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -825,7 +860,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 4,
                     CategoryId = 8,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -848,7 +884,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 4,
                     CategoryId = 8,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -871,7 +908,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 4,
                     CategoryId = 1,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -894,7 +932,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 4,
                     CategoryId = 2,
-                    PurposeId = 2
+                    PurposeId = 2,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -917,7 +956,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 4,
                     CategoryId = 1,
-                    PurposeId = 4
+                    PurposeId = 4,
+                    AgentId = 1
                 },
                   
                   new Car()
@@ -940,7 +980,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 4,
                     CategoryId = 1,
-                    PurposeId = 4
+                    PurposeId = 4,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -963,7 +1004,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 5,
                     CategoryId = 1,
-                    PurposeId = 7             
+                    PurposeId = 7,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -986,7 +1028,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 5,
                     CategoryId = 3,
-                    PurposeId = 7
+                    PurposeId = 7,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1009,7 +1052,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 5,
                     CategoryId = 3,
-                    PurposeId = 7
+                    PurposeId = 7,
+                    AgentId = 1
 
                 },
 
@@ -1033,7 +1077,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 5,
                     CategoryId = 6,
-                    PurposeId = 7
+                    PurposeId = 7,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1056,7 +1101,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 5,
                     CategoryId = 3,
-                    PurposeId = 7
+                    PurposeId = 7,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1079,7 +1125,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 5,
                     CategoryId = 2,
-                    PurposeId = 5
+                    PurposeId = 5,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1102,7 +1149,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 5,
                     CategoryId = 3,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1125,7 +1173,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 5,
                     CategoryId = 3,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1148,7 +1197,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 5,
                     CategoryId = 1,
-                    PurposeId = 4
+                    PurposeId = 4,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1171,7 +1221,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 5,
                     CategoryId = 8,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1194,7 +1245,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 6,
                     CategoryId = 8,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1217,7 +1269,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 6,
                     CategoryId = 8,
-                    PurposeId = 3
+                    PurposeId = 3,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1240,7 +1293,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 6,
                     CategoryId = 8,
-                    PurposeId = 3
+                    PurposeId = 3,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1263,7 +1317,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 6,
                     CategoryId = 1,
-                    PurposeId = 4
+                    PurposeId = 4,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1286,7 +1341,9 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 6,
                     CategoryId = 8,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
+
                 },
 
                   new Car()
@@ -1309,7 +1366,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 7,
                     CategoryId = 8,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1332,7 +1390,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 7,
                     CategoryId = 2,
-                    PurposeId = 2
+                    PurposeId = 2,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1355,7 +1414,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 7,
                     CategoryId = 8,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1378,7 +1438,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 7,
                     CategoryId = 7,
-                    PurposeId = 4
+                    PurposeId = 4,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1401,7 +1462,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 7,
                     CategoryId = 3,
-                    PurposeId = 6
+                    PurposeId = 6,
+                    AgentId = 1
                 },
 
                     new Car()
@@ -1424,7 +1486,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 7,
                     CategoryId = 3,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1447,7 +1510,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 7,
                     CategoryId = 3,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1470,7 +1534,9 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 7,
                     CategoryId = 8,
-                    PurposeId = 3
+                    PurposeId = 3,
+                    AgentId = 1
+
                 },
 
                   new Car()
@@ -1493,7 +1559,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 7,
                     CategoryId = 8,
-                    PurposeId = 3
+                    PurposeId = 3,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1516,7 +1583,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 7,
                     CategoryId = 8,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1539,7 +1607,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 8,
                     CategoryId = 3,
-                    PurposeId = 7
+                    PurposeId = 7,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1562,7 +1631,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 8,
                     CategoryId = 3,
-                    PurposeId = 7
+                    PurposeId = 7,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1585,7 +1655,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 8,
                     CategoryId = 1,
-                    PurposeId = 7
+                    PurposeId = 7,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1608,7 +1679,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 8,
                     CategoryId = 3,
-                    PurposeId = 7
+                    PurposeId = 7,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1631,7 +1703,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 8,
                     CategoryId = 4,
-                    PurposeId = 6
+                    PurposeId = 6,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1654,7 +1727,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 8,
                     CategoryId = 8,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1677,7 +1751,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 8,
                     CategoryId = 1,
-                    PurposeId = 4
+                    PurposeId = 4,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1700,7 +1775,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 8,
                     CategoryId = 6,
-                    PurposeId = 4
+                    PurposeId = 4,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1723,7 +1799,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 8,
                     CategoryId = 7,
-                    PurposeId = 3
+                    PurposeId = 3,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1746,7 +1823,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 8,
                     CategoryId = 5,
-                    PurposeId = 4
+                    PurposeId = 4,
+                    AgentId = 1
                 },
 
                     new Car()
@@ -1769,7 +1847,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 9,
                     CategoryId = 8,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1792,7 +1871,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 9,
                     CategoryId = 2,
-                    PurposeId = 2
+                    PurposeId = 2,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1815,7 +1895,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 9,
                     CategoryId = 8,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1838,7 +1919,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 9,
                     CategoryId = 8,
-                    PurposeId = 3
+                    PurposeId = 3,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1861,7 +1943,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 9,
                     CategoryId = 8,
-                    PurposeId = 3
+                    PurposeId = 3,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1884,7 +1967,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 10,
                     CategoryId = 8,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1907,7 +1991,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 10,
                     CategoryId = 8,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1930,7 +2015,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 10,
                     CategoryId = 1,
-                    PurposeId = 4
+                    PurposeId = 4,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1953,7 +2039,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 10,
                     CategoryId = 2,
-                    PurposeId = 5
+                    PurposeId = 5,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1976,7 +2063,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 10,
                     CategoryId = 3,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -1999,7 +2087,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 10,
                     CategoryId = 3,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -2022,7 +2111,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 10,
                     CategoryId = 3,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -2045,7 +2135,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 10,
                     CategoryId = 2,
-                    PurposeId = 5
+                    PurposeId = 5,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -2068,7 +2159,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 10,
                     CategoryId = 1,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
 
                   new Car()
@@ -2091,7 +2183,8 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
                     Availability = true,
                     LocationId = 10,
                     CategoryId = 3,
-                    PurposeId = 1
+                    PurposeId = 1,
+                    AgentId = 1
                 },
             };
 

@@ -224,6 +224,38 @@ namespace RentACarPlatform.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("RentACarPlatform.Infrastructure.Data.Models.Agent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Agents");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            PhoneNumber = "+359888888888",
+                            UserId = "dea12856-c198-4129-b3f3-b893d8395082"
+                        });
+                });
+
             modelBuilder.Entity("RentACarPlatform.Infrastructure.Data.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -232,15 +264,11 @@ namespace RentACarPlatform.Infrastructure.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("BirthDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("ConcurrencyStamp")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CountryName")
-                        .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -249,12 +277,15 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
 
                     b.Property<string>("LastName")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -288,7 +319,41 @@ namespace RentACarPlatform.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("ApplicationUser");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "dea12856-c198-4129-b3f3-b893d8395082",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "cfaeb974-6bd8-4e4d-a992-079b4306521a",
+                            Email = "agent@mail.com",
+                            EmailConfirmed = false,
+                            IsActive = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "agent@mail.com",
+                            NormalizedUserName = "agent@mail.com",
+                            PasswordHash = "AQAAAAEAACcQAAAAENzGff9qOCBWlMuV49fj7I7y3s/8PEk8Une+rcoauSzI8egH9tNREOvl3pU3ML0bOA==",
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            UserName = "agent@mail.com"
+                        },
+                        new
+                        {
+                            Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "2e743642-6f7e-43c3-b9f2-b49ebc98e988",
+                            Email = "guest@mail.com",
+                            EmailConfirmed = false,
+                            IsActive = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "guest@mail.com",
+                            NormalizedUserName = "guest@mail.com",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEmZNgv7N6EJmj/r5mIKfCADAv0+oEkXpcp8rxcSgUYl/UjiWkB2PFvxQjdEYaq7Bw==",
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            UserName = "guest@mail.com"
+                        });
                 });
 
             modelBuilder.Entity("RentACarPlatform.Infrastructure.Data.Models.Car", b =>
@@ -298,6 +363,9 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("AgentId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("Availability")
                         .HasColumnType("bit");
@@ -372,6 +440,8 @@ namespace RentACarPlatform.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AgentId");
+
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("LocationId");
@@ -386,6 +456,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 1,
                             Cubage = 3500,
@@ -401,6 +472,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                             Model = "E 350",
                             PricePerDay = 300m,
                             PurposeId = 7,
+                            RenterId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             Seats = 5,
                             TankCapacity = 80,
                             TrunkVolume = 540,
@@ -409,6 +481,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 2,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 1,
                             Cubage = 5000,
@@ -432,6 +505,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 3,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 1,
                             Cubage = 3000,
@@ -455,6 +529,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 4,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 3,
                             Cubage = 4000,
@@ -478,6 +553,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 5,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 3,
                             Cubage = 3000,
@@ -501,6 +577,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 6,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 3,
                             Cubage = 3000,
@@ -524,6 +601,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 7,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 5,
                             Cubage = 4000,
@@ -547,6 +625,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 8,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 1,
                             Cubage = 2000,
@@ -570,6 +649,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 9,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 2,
                             Cubage = 2000,
@@ -593,6 +673,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 10,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 2,
                             Cubage = 2000,
@@ -616,6 +697,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 11,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 6,
                             Cubage = 2000,
@@ -639,6 +721,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 12,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 3,
                             Cubage = 1600,
@@ -662,6 +745,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 13,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 6,
                             Cubage = 2500,
@@ -685,6 +769,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 14,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 5,
                             Cubage = 2000,
@@ -708,6 +793,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 15,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 2,
                             Cubage = 1600,
@@ -731,6 +817,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 16,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 4,
                             Cubage = 3200,
@@ -754,6 +841,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 17,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 2,
                             Cubage = 1400,
@@ -777,6 +865,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 18,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 3,
                             Cubage = 1500,
@@ -800,6 +889,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 19,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 7,
                             Cubage = 2000,
@@ -823,6 +913,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 20,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 8,
                             Cubage = 1200,
@@ -846,6 +937,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 21,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 8,
                             Cubage = 1200,
@@ -869,6 +961,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 22,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 8,
                             Cubage = 1400,
@@ -892,6 +985,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 23,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 2,
                             Cubage = 1400,
@@ -915,6 +1009,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 24,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 8,
                             Cubage = 1500,
@@ -938,6 +1033,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 25,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 8,
                             Cubage = 1600,
@@ -961,6 +1057,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 26,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 3,
                             Cubage = 1500,
@@ -984,6 +1081,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 27,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 3,
                             Cubage = 1500,
@@ -1007,6 +1105,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 28,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 1,
                             Cubage = 1600,
@@ -1030,6 +1129,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 29,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 1,
                             Cubage = 2000,
@@ -1053,6 +1153,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 30,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 8,
                             Cubage = 1200,
@@ -1076,6 +1177,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 31,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 8,
                             Cubage = 1200,
@@ -1099,6 +1201,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 32,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 3,
                             Cubage = 1500,
@@ -1122,6 +1225,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 33,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 3,
                             Cubage = 1500,
@@ -1145,6 +1249,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 34,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 3,
                             Cubage = 1500,
@@ -1168,6 +1273,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 35,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 8,
                             Cubage = 1500,
@@ -1191,6 +1297,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 36,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 8,
                             Cubage = 1500,
@@ -1214,6 +1321,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 37,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 1,
                             Cubage = 2000,
@@ -1237,6 +1345,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 38,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 2,
                             Cubage = 2000,
@@ -1260,6 +1369,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 39,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 1,
                             Cubage = 1600,
@@ -1283,6 +1393,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 40,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 1,
                             Cubage = 2000,
@@ -1306,6 +1417,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 41,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 1,
                             Cubage = 5000,
@@ -1329,6 +1441,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 42,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 3,
                             Cubage = 4000,
@@ -1352,6 +1465,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 43,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 3,
                             Cubage = 3000,
@@ -1375,6 +1489,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 44,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 6,
                             Cubage = 6000,
@@ -1398,6 +1513,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 45,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 3,
                             Cubage = 6000,
@@ -1421,6 +1537,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 46,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 2,
                             Cubage = 2000,
@@ -1444,6 +1561,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 47,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 3,
                             Cubage = 1500,
@@ -1467,6 +1585,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 48,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 3,
                             Cubage = 1500,
@@ -1490,6 +1609,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 49,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 1,
                             Cubage = 2000,
@@ -1513,6 +1633,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 50,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 8,
                             Cubage = 1600,
@@ -1536,6 +1657,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 51,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 8,
                             Cubage = 1600,
@@ -1559,6 +1681,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 52,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 8,
                             Cubage = 1600,
@@ -1582,6 +1705,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 53,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 8,
                             Cubage = 2000,
@@ -1605,6 +1729,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 54,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 1,
                             Cubage = 1600,
@@ -1628,6 +1753,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 55,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 8,
                             Cubage = 1500,
@@ -1651,6 +1777,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 56,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 8,
                             Cubage = 1500,
@@ -1674,6 +1801,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 57,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 2,
                             Cubage = 2000,
@@ -1697,6 +1825,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 58,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 8,
                             Cubage = 1600,
@@ -1720,6 +1849,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 59,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 7,
                             Cubage = 2000,
@@ -1743,6 +1873,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 60,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 3,
                             Cubage = 5600,
@@ -1766,6 +1897,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 61,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 3,
                             Cubage = 1500,
@@ -1789,6 +1921,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 62,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 3,
                             Cubage = 1500,
@@ -1812,6 +1945,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 63,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 8,
                             Cubage = 1600,
@@ -1835,6 +1969,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 64,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 8,
                             Cubage = 2000,
@@ -1858,6 +1993,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 65,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 8,
                             Cubage = 1600,
@@ -1881,6 +2017,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 66,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 3,
                             Cubage = 3000,
@@ -1904,6 +2041,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 67,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 3,
                             Cubage = 3000,
@@ -1927,6 +2065,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 68,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 1,
                             Cubage = 4000,
@@ -1950,6 +2089,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 69,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 3,
                             Cubage = 3000,
@@ -1973,6 +2113,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 70,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 4,
                             Cubage = 5700,
@@ -1996,6 +2137,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 71,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 8,
                             Cubage = 1500,
@@ -2019,6 +2161,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 72,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 1,
                             Cubage = 2000,
@@ -2042,6 +2185,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 73,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 6,
                             Cubage = 3000,
@@ -2065,6 +2209,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 74,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 7,
                             Cubage = 2000,
@@ -2088,6 +2233,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 75,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 5,
                             Cubage = 3000,
@@ -2111,6 +2257,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 76,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 8,
                             Cubage = 1500,
@@ -2134,6 +2281,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 77,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 2,
                             Cubage = 2000,
@@ -2157,6 +2305,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 78,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 8,
                             Cubage = 1600,
@@ -2180,6 +2329,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 79,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 8,
                             Cubage = 2000,
@@ -2203,6 +2353,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 80,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 8,
                             Cubage = 2000,
@@ -2226,6 +2377,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 81,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 8,
                             Cubage = 1500,
@@ -2249,6 +2401,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 82,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 8,
                             Cubage = 1600,
@@ -2272,6 +2425,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 83,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 1,
                             Cubage = 2000,
@@ -2295,6 +2449,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 84,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 2,
                             Cubage = 2000,
@@ -2318,6 +2473,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 85,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 3,
                             Cubage = 1500,
@@ -2341,6 +2497,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 86,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 3,
                             Cubage = 1500,
@@ -2364,6 +2521,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 87,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 3,
                             Cubage = 1500,
@@ -2387,6 +2545,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 88,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 2,
                             Cubage = 2000,
@@ -2410,6 +2569,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 89,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 1,
                             Cubage = 2000,
@@ -2433,6 +2593,7 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         new
                         {
                             Id = 90,
+                            AgentId = 1,
                             Availability = true,
                             CategoryId = 3,
                             Cubage = 1500,
@@ -2688,54 +2849,6 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("RentACarPlatform.Infrastructure.Data.Models.Rental", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("CarId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DropOffLocationId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DropOffTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("PickUpLocationId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("PickUpTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("ProtectionId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CarId");
-
-                    b.HasIndex("DropOffLocationId");
-
-                    b.HasIndex("PickUpLocationId");
-
-                    b.HasIndex("ProtectionId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Rentals");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -2787,8 +2900,25 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("RentACarPlatform.Infrastructure.Data.Models.Agent", b =>
+                {
+                    b.HasOne("RentACarPlatform.Infrastructure.Data.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("RentACarPlatform.Infrastructure.Data.Models.Car", b =>
                 {
+                    b.HasOne("RentACarPlatform.Infrastructure.Data.Models.Agent", "Agent")
+                        .WithMany()
+                        .HasForeignKey("AgentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("RentACarPlatform.Infrastructure.Data.Models.CarCategory", "Category")
                         .WithMany("Cars")
                         .HasForeignKey("CategoryId")
@@ -2811,6 +2941,8 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         .WithMany()
                         .HasForeignKey("RenterId");
 
+                    b.Navigation("Agent");
+
                     b.Navigation("Category");
 
                     b.Navigation("Location");
@@ -2818,47 +2950,6 @@ namespace RentACarPlatform.Infrastructure.Migrations
                     b.Navigation("Purpose");
 
                     b.Navigation("Renter");
-                });
-
-            modelBuilder.Entity("RentACarPlatform.Infrastructure.Data.Models.Rental", b =>
-                {
-                    b.HasOne("RentACarPlatform.Infrastructure.Data.Models.Car", "Car")
-                        .WithMany()
-                        .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RentACarPlatform.Infrastructure.Data.Models.Location", "DropOffLocation")
-                        .WithMany("DropOffRental")
-                        .HasForeignKey("DropOffLocationId")
-                        .IsRequired();
-
-                    b.HasOne("RentACarPlatform.Infrastructure.Data.Models.Location", "PickUpLocation")
-                        .WithMany("PickUpRental")
-                        .HasForeignKey("PickUpLocationId")
-                        .IsRequired();
-
-                    b.HasOne("RentACarPlatform.Infrastructure.Data.Models.Protection", "Protection")
-                        .WithMany()
-                        .HasForeignKey("ProtectionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RentACarPlatform.Infrastructure.Data.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Car");
-
-                    b.Navigation("DropOffLocation");
-
-                    b.Navigation("PickUpLocation");
-
-                    b.Navigation("Protection");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("RentACarPlatform.Infrastructure.Data.Models.CarCategory", b =>
@@ -2869,13 +2960,6 @@ namespace RentACarPlatform.Infrastructure.Migrations
             modelBuilder.Entity("RentACarPlatform.Infrastructure.Data.Models.CarPurpose", b =>
                 {
                     b.Navigation("Cars");
-                });
-
-            modelBuilder.Entity("RentACarPlatform.Infrastructure.Data.Models.Location", b =>
-                {
-                    b.Navigation("DropOffRental");
-
-                    b.Navigation("PickUpRental");
                 });
 #pragma warning restore 612, 618
         }

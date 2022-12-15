@@ -6,19 +6,14 @@ namespace RentACarPlatform.Infrastructure.Data.Models
 {
     public class ApplicationUser : IdentityUser<string>
     {
-               
-        [MaxLength(FirstNameMaxLength)]
+                  
         public string? FirstName { get; set; } 
-
-
-        [MaxLength(LastNameMaxLength)]
+        
         public string? LastName { get; set; } 
+      
+        public string? CountryName { get; set; }
 
-    
-        [MaxLength(CountryNameMaxLength)]
-        public string? CountryName { get; set; } 
+        public bool IsActive { get; set; } = true;
 
-        [Required]
-        public DateTime BirthDate { get; set; }
     }
 }

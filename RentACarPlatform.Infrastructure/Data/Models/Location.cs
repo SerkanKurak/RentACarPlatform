@@ -6,11 +6,7 @@ namespace RentACarPlatform.Infrastructure.Data.Models
 {
     public class Location
     {
-        public List<Rental> PickUpRental { get; set; } = null!;
-
-        public List<Rental> DropOffRental { get; set; } = null!;
-
-
+        
         [Key]
         public int Id { get; set; }
 

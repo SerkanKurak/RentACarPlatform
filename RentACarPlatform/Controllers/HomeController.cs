@@ -9,13 +9,24 @@ namespace RentACarPlatform.Controllers
     {
         private readonly ICarService carService;
 
-        public HomeController(ICarService _carService)
+        private readonly ILogger logger;
+
+        public HomeController(
+               ICarService _carService,
+               ILogger<HomeController> _logger)
         {
             carService = _carService;
+            logger = _logger;
         }
               
         public async Task<IActionResult> Index()
         {
+
+           // if (User.IsInRole(AdminRolleName))
+           // {
+           //     return RedirectToAction("Index", "Admin", new { area = "Admin" });
+           // }
+
             var model = await carService.AllCars();
 
             return View(model);

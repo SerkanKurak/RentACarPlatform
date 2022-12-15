@@ -1,26 +1,29 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using RentACarPlatform.Core.Contracts;
 using RentACarPlatform.Core.Exceptions;
 using RentACarPlatform.Core.Models.Car;
 using RentACarPlatform.Infrastructure.Data.Common;
 using RentACarPlatform.Infrastructure.Data.Models;
-using System;
-using System.Xml.Linq;
 
 namespace RentACarPlatform.Core.Services
 {
-   public class CarService : ICarService
+    public class CarService : ICarService
    {
        private readonly IRepository repo;
 
        private readonly IGuard guard;
 
+       private readonly ILogger logger;
+
         public CarService(
                IRepository _repo,
-               IGuard _guard)
+               IGuard _guard,
+               ILogger<CarService> _logger)
        {
            repo = _repo;
            guard = _guard;
+           logger = _logger;
        }
 
         
@@ -42,8 +45,7 @@ namespace RentACarPlatform.Core.Services
    
                cars = cars
                    .Where(c => EF.Functions.Like(c.Make.ToLower(), searchTerm) ||
-                       EF.Functions.Like(c.Model.ToLower(), searchTerm));
-   
+                       EF.Functions.Like(c.Model.ToLower(), searchTerm)); 
            }
 
 
@@ -73,8 +75,8 @@ namespace RentACarPlatform.Core.Services
                   Model = c.Model,
                   ImageUrl = c.ImageUrl,
                   PricePerDay = c.PricePerDay,
-                  IsRented = c.Availability,
-                
+                  IsRented = c.RenterId != null
+
               })
               .ToListAsync();
    
@@ -100,8 +102,7 @@ namespace RentACarPlatform.Core.Services
         public async Task<IEnumerable<CarServiceModel>> AllCarsByUserId(string userId)
         {
             return await repo.AllReadonly<Car>()
-                .Where(c => c.RenterId == userId)
-                .Where(c => c.Availability)
+                .Where(c => c.RenterId == userId)                
                 .Where(c => c.IsActive)
                 .Select(c => new CarServiceModel()
                 {                  
@@ -118,6 +119,7 @@ namespace RentACarPlatform.Core.Services
         public async Task<IEnumerable<CarCategoryModel>> AllCategories()
         {
             return await repo.AllReadonly<CarCategory>()
+               .OrderBy(c => c.Name)
                .Select(c => new CarCategoryModel()
                {
                    Id = c.Id,
@@ -142,6 +144,23 @@ namespace RentACarPlatform.Core.Services
               .ToListAsync();
         }
 
+        public async Task<IEnumerable<CarServiceModel>> AllCarsByAgentId(int id)
+        {
+            return await repo.AllReadonly<Car>()
+               .Where(c => c.IsActive)
+               .Where(c => c.AgentId == id)
+               .Select(c => new CarServiceModel()
+               {
+                   Id = c.Id,
+                   Make = c.Make,
+                   Model = c.Model,
+                   ImageUrl = c.ImageUrl,
+                   PricePerDay = c.PricePerDay,
+                   IsRented = c.RenterId != null
+               })
+               .ToListAsync();
+        }
+
         public async Task<IEnumerable<string>> AllPickUpLocations()
         {
             return await repo.AllReadonly<Location>()
@@ -162,7 +181,7 @@ namespace RentACarPlatform.Core.Services
                        Model = c.Model,
                        ImageUrl = c.ImageUrl,
                        PricePerDay = c.PricePerDay,
-                       IsRented = c.Availability, //c.RenterId != null
+                       IsRented = c.RenterId != null,
                        FuelType = c.FuelType,
                        Gearbox = c.Gearbox,
                        Year = c.Year,
@@ -175,7 +194,12 @@ namespace RentACarPlatform.Core.Services
                        Cubage = c.Cubage,
                        Category = c.Category,
                        Purpose = c.Purpose,
-                       Location = c.Location,                                         
+                       Location = c.Location,
+                       Agent = new Models.Agent.AgentServiceModel()
+                       {
+                           Email = c.Agent.User.Email,
+                           PhoneNumber = c.Agent.PhoneNumber
+                       }
                    })
                    .FirstAsync();
         }
@@ -186,7 +210,7 @@ namespace RentACarPlatform.Core.Services
                  .AnyAsync(c => c.Id == categoryId);
        }
    
-       public async Task<int> Create(CarModel model)
+       public async Task<int> Create(CarModel model, int agentId)
        {
            var car = new Car()
            {
@@ -205,13 +229,22 @@ namespace RentACarPlatform.Core.Services
                PricePerDay = model.PricePerDay,
                ImageUrl = model.ImageUrl,             
                CategoryId = model.CategoryId,
+               AgentId = agentId
            };
-   
-           await repo.AddAsync(car);
-           await repo.SaveChangesAsync();
-   
-           return car.Id;
-       }
+
+            try
+            {
+                await repo.AddAsync(car);
+                await repo.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(nameof(Create), ex);
+                throw new ApplicationException("Database failed to save info", ex);
+            }
+
+            return car.Id;
+        }
 
         public async Task Delete(int carId)
         {
@@ -250,6 +283,23 @@ namespace RentACarPlatform.Core.Services
             return (await repo.GetByIdAsync<Car>(carId)).CategoryId;
         }
 
+        public async Task<bool> HasAgentWithId(int carId, string currentUserId)
+        {
+            bool result = false;
+            var car = await repo.AllReadonly<Car>()
+                .Where(c => c.IsActive)
+                .Where(c => c.Id == carId)
+                .Include(c => c.Agent)
+                .FirstOrDefaultAsync();
+
+            if (car?.Agent != null && car.Agent.UserId == currentUserId)
+            {
+                result = true;
+            }
+
+            return result;
+        }
+
         public async Task<bool> IsExist(int id)
         {
             return await repo.AllReadonly<Car>().AnyAsync(c => c.Id == id && c.IsActive);              
@@ -280,7 +330,9 @@ namespace RentACarPlatform.Core.Services
         public async Task Leave(int carId)
         {
             var car = await repo.GetByIdAsync<Car>(carId);
+
             guard.AgainstNull(car, "Car can not be found");
+
             car.RenterId = null;
 
             await repo.SaveChangesAsync();

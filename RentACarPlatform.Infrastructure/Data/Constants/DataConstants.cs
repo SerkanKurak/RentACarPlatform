@@ -2,6 +2,12 @@
 {
     public static class DataConstants
     {
+        public static class AgentData
+        {
+            public const int PhoneNumberMinLength = 7;
+            public const int PhoneNumberMaxLength = 15;
+        }
+
         public static class CarCategoryData
         {
             public const int NameMaxLength = 10;
