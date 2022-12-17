@@ -2,6 +2,9 @@
 
 namespace RentACarPlatform.Areas.Admin.Models
 {
+    /// <summary>
+    /// Admin Cars View Model
+    /// </summary>
     public class MyCarsViewModel
     {
         public IEnumerable<CarServiceModel> AddedCars { get; set; }

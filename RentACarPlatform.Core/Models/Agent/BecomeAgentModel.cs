@@ -3,6 +3,9 @@ using static RentACarPlatform.Infrastructure.Data.Constants.DataConstants.AgentD
 
 namespace RentACarPlatform.Core.Models.Agent
 {
+    /// <summary>
+    /// Become Agent
+    /// </summary>
     public class BecomeAgentModel
     {
         [Required]

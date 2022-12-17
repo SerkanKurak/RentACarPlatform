@@ -2,6 +2,9 @@
 
 namespace RentACarPlatform.Models
 {
+    /// <summary>
+    /// All Cars Model for AllCars menu
+    /// </summary>
     public class AllCarsQueryModel
     {
 

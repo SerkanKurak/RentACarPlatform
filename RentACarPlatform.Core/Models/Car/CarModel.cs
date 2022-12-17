@@ -3,6 +3,9 @@ using static RentACarPlatform.Infrastructure.Data.Constants.DataConstants.CarDat
 
 namespace RentACarPlatform.Core.Models.Car
 {
+    /// <summary>
+    /// Model for Edit a car
+    /// </summary>
     public class CarModel
     {
         public int Id { get; set; }

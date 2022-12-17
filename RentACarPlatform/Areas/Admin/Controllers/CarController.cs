@@ -5,6 +5,9 @@ using RentACarPlatform.Extensions;
 
 namespace RentACarPlatform.Areas.Admin.Controllers
 {
+    /// <summary>
+    /// Admin Car Controller
+    /// </summary>
     public class CarController : BaseController
     {
         private readonly ICarService carService;
@@ -19,6 +22,9 @@ namespace RentACarPlatform.Areas.Admin.Controllers
             agentService = _agentService;
         }
 
+        /// <summary>
+        /// Admin Cars
+        /// </summary>
         public async Task<IActionResult> Mine()
         {
             var myCars = new MyCarsViewModel();

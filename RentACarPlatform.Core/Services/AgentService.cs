@@ -5,6 +5,10 @@ using RentACarPlatform.Infrastructure.Data.Models;
 
 namespace RentACarPlatform.Core.Services
 {
+
+    /// <summary>
+    /// Agent Service with all methods
+    /// </summary>
     public class AgentService : IAgentService
     {
         private readonly IRepository repo;

@@ -7,6 +7,10 @@ using RentACarPlatform.Extensions;
 
 namespace RentACarPlatform.Controllers
 {
+    /// <summary>
+    /// Agent Controller
+    /// </summary>
+
     [Authorize]
     public class AgentController : Controller
     {

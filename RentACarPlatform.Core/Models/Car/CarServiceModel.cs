@@ -2,6 +2,9 @@
 
 namespace RentACarPlatform.Core.Models.Car
 {
+    /// <summary>
+    /// Model for Car Specifications
+    /// </summary>
     public class CarServiceModel
     {
         public int Id { get; set; }

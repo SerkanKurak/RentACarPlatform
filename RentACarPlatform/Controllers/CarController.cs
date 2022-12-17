@@ -9,6 +9,10 @@ using static RentACarPlatform.Areas.Admin.Constants.AdminConstants;
 
 namespace RentACarPlatform.Controllers
 {
+    /// <summary>
+    /// Car Controller
+    /// </summary>
+
     [Authorize]
     public class CarController : Controller
     {

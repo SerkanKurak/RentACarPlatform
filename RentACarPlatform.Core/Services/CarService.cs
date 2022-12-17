@@ -126,7 +126,7 @@ namespace RentACarPlatform.Core.Services
 
 
         /// <summary>
-        /// This method used for get all car categories
+        /// This method used for get all car categories names
         /// </summary>
         public async Task<IEnumerable<CarCategoryModel>> AllCategories()
         {

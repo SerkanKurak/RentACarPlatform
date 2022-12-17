@@ -6,6 +6,9 @@ using static RentACarPlatform.Areas.Admin.Constants.AdminConstants;
 
 namespace RentACarPlatform.Controllers
 {
+    /// <summary>
+    /// Home Controller
+    /// </summary>
     public class HomeController : Controller
     {
         private readonly ICarService carService;

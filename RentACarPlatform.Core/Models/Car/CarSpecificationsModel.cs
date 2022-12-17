@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RentACarPlatform.Core.Models.Car
 {
+    /// <summary>
+    /// Model for Car Specifications
+    /// </summary>
     public class CarSpecificationsModel : CarServiceModel
     {
         [Display(Name = "Fuel type")]
