@@ -4,10 +4,10 @@ namespace RentACarPlatform.Areas.Admin.Models
 {
     public class MyCarsViewModel
     {
-        public IEnumerable<CarServiceModel> AddedHouses { get; set; }
-            = new List<CarServiceModel>();
+        public IEnumerable<CarServiceModel> AddedCars { get; set; }
+           = new List<CarServiceModel>();
 
-        public IEnumerable<CarServiceModel> RentedHouses { get; set; }
+        public IEnumerable<CarServiceModel> RentedCars { get; set; }
             = new List<CarServiceModel>();
     }
 }

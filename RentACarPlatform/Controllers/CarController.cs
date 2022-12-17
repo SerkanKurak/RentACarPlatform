@@ -4,6 +4,8 @@ using RentACarPlatform.Core.Contracts;
 using RentACarPlatform.Core.Models.Car;
 using RentACarPlatform.Extensions;
 using RentACarPlatform.Models;
+using static RentACarPlatform.Areas.Admin.Constants.AdminConstants;
+
 
 namespace RentACarPlatform.Controllers
 {
@@ -50,10 +52,10 @@ namespace RentACarPlatform.Controllers
 
         public async Task<IActionResult> Mine()
         {
-           //if (User.IsInRole(AdminRolleName))
-           //{
-           //    return RedirectToAction("Mine", "House", new { area = AreaName });
-           //}
+           if (User.IsInRole(AdminRolleName))
+           {
+               return RedirectToAction("Mine", "Car", new { area = AreaName });
+           }
 
             IEnumerable<CarServiceModel> myCars;
 
@@ -136,12 +138,12 @@ namespace RentACarPlatform.Controllers
                 return RedirectToAction(nameof(All));
             }
 
-           // if ((await carService.HasAgentWithId(id, User.Id())) == false)
-           // {
-           //     logger.LogInformation("User with id {0} attempted to open other agent car", User.Id());
-           //
-           //     return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
-           // }
+           if ((await carService.HasAgentWithId(id, User.Id())) == false)
+           {
+               logger.LogInformation("User with id {0} attempted to open other agent car", User.Id());
+          
+              // return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+           }
 
             var car = await carService.CarSpecificationsById(id);
             var categoryId = await carService.GetCarCategoryId(id);
@@ -173,10 +175,10 @@ namespace RentACarPlatform.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, CarModel model)
         {
-            //if (id != model.Id)
-            //{
-            //    return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
-            //}
+            if (id != model.Id)
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
 
             if ((await carService.IsExist(model.Id)) == false)
             {
@@ -186,10 +188,10 @@ namespace RentACarPlatform.Controllers
                 return View(model);
             }
 
-           // if ((await carService.HasAgentWithId(model.Id, User.Id())) == false)
-           // {
-           //     return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
-           // }
+            //if ((await carService.HasAgentWithId(model.Id, User.Id())) == false)
+            //{
+            //    return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            //}
 
             if ((await carService.CategoryExist(model.CategoryId)) == false)
             {
@@ -243,10 +245,10 @@ namespace RentACarPlatform.Controllers
                 return RedirectToAction(nameof(All));
             }
 
-           //if ((await carService.HasAgentWithId(id, User.Id())) == false)
-           //{
-           //    return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
-           //}
+           // if ((await carService.HasAgentWithId(id, User.Id())) == false)
+           // {
+           //     return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+           // }
 
             await carService.Delete(id);
 
@@ -260,12 +262,11 @@ namespace RentACarPlatform.Controllers
             {
                 return RedirectToAction(nameof(All));
             }
-
-            //!User.IsInRole(AdminRolleName) &&
-            //if (await agentService.ExistById(User.Id()))
-            //{
-            //    return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
-            //}
+            
+            if (!User.IsInRole(AdminRolleName) && await agentService.ExistById(User.Id()))
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
 
             if (await carService.IsRented(id))
             {

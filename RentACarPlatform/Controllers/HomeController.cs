@@ -2,6 +2,7 @@
 using RentACarPlatform.Core.Contracts;
 using RentACarPlatform.Models;
 using System.Diagnostics;
+using static RentACarPlatform.Areas.Admin.Constants.AdminConstants;
 
 namespace RentACarPlatform.Controllers
 {
@@ -22,10 +23,10 @@ namespace RentACarPlatform.Controllers
         public async Task<IActionResult> Index()
         {
 
-           // if (User.IsInRole(AdminRolleName))
-           // {
-           //     return RedirectToAction("Index", "Admin", new { area = "Admin" });
-           // }
+            if (User.IsInRole(AdminRolleName))
+            {
+                return RedirectToAction("Index", "Admin", new { area = "Admin" });
+            }
 
             var model = await carService.AllCars();
 

@@ -12,8 +12,8 @@ using RentACarPlatform.Infrastructure.Data;
 namespace RentACarPlatform.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221215124251_SeedDb")]
-    partial class SeedDb
+    [Migration("20221217103525_SeedDbAndAddChanges")]
+    partial class SeedDbAndAddChanges
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -328,14 +328,14 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cfaeb974-6bd8-4e4d-a992-079b4306521a",
+                            ConcurrencyStamp = "f7a2c21a-4247-4262-bf7f-ed5e7aba2ab3",
                             Email = "agent@mail.com",
                             EmailConfirmed = false,
                             IsActive = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "agent@mail.com",
                             NormalizedUserName = "agent@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAENzGff9qOCBWlMuV49fj7I7y3s/8PEk8Une+rcoauSzI8egH9tNREOvl3pU3ML0bOA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEH5xZ0THZBY7Jdeev4Jle5NKkqGax0zVgcUlagtVfaWdhijjl/dSNC7YIbbTkHC/ww==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
                             UserName = "agent@mail.com"
@@ -344,14 +344,14 @@ namespace RentACarPlatform.Infrastructure.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2e743642-6f7e-43c3-b9f2-b49ebc98e988",
+                            ConcurrencyStamp = "3f6886a4-2245-4a3a-adc7-ada28f8446ab",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             IsActive = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@mail.com",
                             NormalizedUserName = "guest@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEmZNgv7N6EJmj/r5mIKfCADAv0+oEkXpcp8rxcSgUYl/UjiWkB2PFvxQjdEYaq7Bw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIvpBNcDOHItMD9Mlx4mioxX85f1S1BFRN87+ZVESjami2tritJyXLL9tR7B6UYATg==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"

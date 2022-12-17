@@ -65,7 +65,7 @@ namespace RentACarPlatform.Controllers
 
             await agentService.Create(userId, model.PhoneNumber);
 
-            return RedirectToAction("All", "House");
+            return RedirectToAction("All", "Car");
         }
     }
 }

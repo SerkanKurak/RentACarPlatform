@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RentACarPlatform.Infrastructure.Migrations
 {
-    public partial class SeedDb : Migration
+    public partial class SeedDbAndAddChanges : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -324,8 +324,8 @@ namespace RentACarPlatform.Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CountryName", "Email", "EmailConfirmed", "FirstName", "IsActive", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, "2e743642-6f7e-43c3-b9f2-b49ebc98e988", null, "guest@mail.com", false, null, true, null, false, null, "guest@mail.com", "guest@mail.com", "AQAAAAEAACcQAAAAEEmZNgv7N6EJmj/r5mIKfCADAv0+oEkXpcp8rxcSgUYl/UjiWkB2PFvxQjdEYaq7Bw==", null, false, null, false, "guest@mail.com" },
-                    { "dea12856-c198-4129-b3f3-b893d8395082", 0, "cfaeb974-6bd8-4e4d-a992-079b4306521a", null, "agent@mail.com", false, null, true, null, false, null, "agent@mail.com", "agent@mail.com", "AQAAAAEAACcQAAAAENzGff9qOCBWlMuV49fj7I7y3s/8PEk8Une+rcoauSzI8egH9tNREOvl3pU3ML0bOA==", null, false, null, false, "agent@mail.com" }
+                    { "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e", 0, "3f6886a4-2245-4a3a-adc7-ada28f8446ab", null, "guest@mail.com", false, null, true, null, false, null, "guest@mail.com", "guest@mail.com", "AQAAAAEAACcQAAAAEIvpBNcDOHItMD9Mlx4mioxX85f1S1BFRN87+ZVESjami2tritJyXLL9tR7B6UYATg==", null, false, null, false, "guest@mail.com" },
+                    { "dea12856-c198-4129-b3f3-b893d8395082", 0, "f7a2c21a-4247-4262-bf7f-ed5e7aba2ab3", null, "agent@mail.com", false, null, true, null, false, null, "agent@mail.com", "agent@mail.com", "AQAAAAEAACcQAAAAEH5xZ0THZBY7Jdeev4Jle5NKkqGax0zVgcUlagtVfaWdhijjl/dSNC7YIbbTkHC/ww==", null, false, null, false, "agent@mail.com" }
                 });
 
             migrationBuilder.InsertData(

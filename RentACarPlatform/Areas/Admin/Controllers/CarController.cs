@@ -23,9 +23,9 @@ namespace RentACarPlatform.Areas.Admin.Controllers
         {
             var myCars = new MyCarsViewModel();
             var adminId = User.Id();
-            myCars.RentedHouses = await carService.AllCarsByUserId(adminId);
+            myCars.RentedCars = await carService.AllCarsByUserId(adminId);
             var agentId = await agentService.GetAgentId(adminId);
-            myCars.AddedHouses = await carService.AllCarsByAgentId(agentId);
+            myCars.AddedCars = await carService.AllCarsByAgentId(agentId);
 
             return View(myCars);
         }
