@@ -11,6 +11,9 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
             builder.HasData(CreateCarPurposes());
         }
 
+        /// <summary>
+        /// Create Car Purposes
+        /// </summary>
         private List<CarPurpose> CreateCarPurposes()
         {
             List<CarPurpose> purposes = new List<CarPurpose>()

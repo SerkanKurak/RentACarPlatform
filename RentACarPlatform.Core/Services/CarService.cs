@@ -8,6 +8,9 @@ using RentACarPlatform.Infrastructure.Data.Models;
 
 namespace RentACarPlatform.Core.Services
 {
+    /// <summary>
+    /// Car Service with all methods
+    /// </summary>
     public class CarService : ICarService
    {
        private readonly IRepository repo;
@@ -26,7 +29,9 @@ namespace RentACarPlatform.Core.Services
            logger = _logger;
        }
 
-        
+        /// <summary>
+        /// Тhis method is used to see all cars
+        /// </summary>
         public async Task<CarsQueryModel> All(string? category = null, string? searchTerm = null, string? pickUpLocation = null, string? dropOffLocation = null, CarSorting sorting = CarSorting.Newest, int currPage = 1, int carsOnPage = 1)
        {
            var cars = repo.AllReadonly<Car>()
@@ -84,8 +89,11 @@ namespace RentACarPlatform.Core.Services
    
            return result;
        }
-   
-       public async Task<IEnumerable<CarHomeModel>> AllCars()
+
+        /// <summary>
+        /// Тhis method is used to see all cars on home page
+        /// </summary>
+        public async Task<IEnumerable<CarHomeModel>> AllCars()
        {
            return await repo.AllReadonly<Car>()
                   .Where(c => c.IsActive)
@@ -115,7 +123,11 @@ namespace RentACarPlatform.Core.Services
                })
                 .ToListAsync();
          }
-      
+
+
+        /// <summary>
+        /// This method used for get all car categories
+        /// </summary>
         public async Task<IEnumerable<CarCategoryModel>> AllCategories()
         {
             return await repo.AllReadonly<CarCategory>()
@@ -127,8 +139,12 @@ namespace RentACarPlatform.Core.Services
                })
                .ToListAsync();
        }
-   
-       public async Task<IEnumerable<string>> AllCategoriesNames()
+
+
+        /// <summary>
+        /// This method used for get all car categories names
+        /// </summary>
+        public async Task<IEnumerable<string>> AllCategoriesNames()
        {
            return await repo.AllReadonly<CarCategory>()
                .Select(c => c.Name)
@@ -136,6 +152,10 @@ namespace RentACarPlatform.Core.Services
                .ToListAsync();
        }
 
+
+        /// <summary>
+        /// This method used for show all DropOff Locations
+        /// </summary>
         public async Task<IEnumerable<string>> AllDropOffLocations()
         {
             return await repo.AllReadonly<Location>()
@@ -161,6 +181,10 @@ namespace RentACarPlatform.Core.Services
                .ToListAsync();
         }
 
+
+        /// <summary>
+        /// This method used for show all PickUp Locations
+        /// </summary>
         public async Task<IEnumerable<string>> AllPickUpLocations()
         {
             return await repo.AllReadonly<Location>()
@@ -169,6 +193,10 @@ namespace RentACarPlatform.Core.Services
               .ToListAsync();
         }
 
+
+        /// <summary>
+        /// This method used for show car specifications
+        /// </summary>
         public async Task<CarSpecificationsModel> CarSpecificationsById(int id)
         {
             return await repo.AllReadonly<Car>()
@@ -204,12 +232,20 @@ namespace RentACarPlatform.Core.Services
                    .FirstAsync();
         }
 
+
+        /// <summary>
+        /// Checking if category exist
+        /// </summary>
         public async Task<bool> CategoryExist(int categoryId)
        {
            return await repo.AllReadonly<CarCategory>()
                  .AnyAsync(c => c.Id == categoryId);
        }
    
+
+        /// <summary>
+        /// This method used to create new car
+        /// </summary>
        public async Task<int> Create(CarModel model, int agentId)
        {
            var car = new Car()
@@ -246,6 +282,10 @@ namespace RentACarPlatform.Core.Services
             return car.Id;
         }
 
+
+        /// <summary>
+        /// This method used to delete chosen car
+        /// </summary>
         public async Task Delete(int carId)
         {
             var car = await repo.GetByIdAsync<Car>(carId);
@@ -254,6 +294,10 @@ namespace RentACarPlatform.Core.Services
             await repo.SaveChangesAsync();
         }
 
+
+        /// <summary>
+        /// This method used to edit chosen car
+        /// </summary>
         public async Task Edit(int carId, CarModel model)
         {
             var car = await repo.GetByIdAsync<Car>(carId);
@@ -278,11 +322,19 @@ namespace RentACarPlatform.Core.Services
             await repo.SaveChangesAsync();
         }
 
+
+        /// <summary>
+        /// This method used to get car category
+        /// </summary>
         public async Task<int> GetCarCategoryId(int carId)
         {
             return (await repo.GetByIdAsync<Car>(carId)).CategoryId;
         }
 
+
+        /// <summary>
+        /// This method used to check if user is Agent
+        /// </summary>
         public async Task<bool> HasAgentWithId(int carId, string currentUserId)
         {
             bool result = false;
@@ -300,16 +352,28 @@ namespace RentACarPlatform.Core.Services
             return result;
         }
 
+
+        /// <summary>
+        /// This method used to check if car exist
+        /// </summary>
         public async Task<bool> IsExist(int id)
         {
             return await repo.AllReadonly<Car>().AnyAsync(c => c.Id == id && c.IsActive);              
         }
 
+
+        /// <summary>
+        /// This method used to check if car is rented
+        /// </summary>
         public async Task<bool> IsRented(int carId)
         {
             return (await repo.GetByIdAsync<Car>(carId)).RenterId != null;
         }
 
+
+        /// <summary>
+        /// This method used to check if car is rented with given user
+        /// </summary>
         public async Task<bool> IsRentedByUserWithId(int carId, string currentUserId)
         {
             bool result = false;
@@ -327,6 +391,10 @@ namespace RentACarPlatform.Core.Services
             return result;
         }
 
+
+        /// <summary>
+        /// This method used for leave a car
+        /// </summary>
         public async Task Leave(int carId)
         {
             var car = await repo.GetByIdAsync<Car>(carId);
@@ -338,6 +406,10 @@ namespace RentACarPlatform.Core.Services
             await repo.SaveChangesAsync();
         }
 
+
+        /// <summary>
+        /// This method used for rent a car
+        /// </summary>
         public async Task Rent(int carId, string currentUserId)
         {
             var car = await repo.GetByIdAsync<Car>(carId);

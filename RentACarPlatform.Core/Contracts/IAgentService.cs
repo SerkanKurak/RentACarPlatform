@@ -1,5 +1,8 @@
 ﻿namespace RentACarPlatform.Core.Contracts
 {
+    /// <summary>
+    /// Agent Service with all methods
+    /// </summary>
     public interface IAgentService
     {
         Task<bool> ExistById(string userId);

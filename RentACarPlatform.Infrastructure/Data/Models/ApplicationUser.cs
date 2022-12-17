@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
-using static RentACarPlatform.Infrastructure.Data.Constants.DataConstants.ApplicationUserData;
 
 namespace RentACarPlatform.Infrastructure.Data.Models
 {
+    /// <summary>
+    /// ApplicationUser entity
+    /// </summary>
     public class ApplicationUser : IdentityUser<string>
     {
                   

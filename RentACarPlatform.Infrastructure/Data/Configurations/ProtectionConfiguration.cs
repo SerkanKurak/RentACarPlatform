@@ -11,6 +11,9 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
             builder.HasData(CreateProtections());
         }
 
+        /// <summary>
+        /// Create Protections
+        /// </summary>
         private List<Protection> CreateProtections()
         {
             List<Protection> protections = new List<Protection>()

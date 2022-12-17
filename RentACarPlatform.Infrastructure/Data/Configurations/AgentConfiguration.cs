@@ -6,6 +6,9 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
 {
     public class AgentConfiguration : IEntityTypeConfiguration<Agent>
     {
+        /// <summary>
+        /// Create Agent 
+        /// </summary>
         public void Configure(EntityTypeBuilder<Agent> builder)
         {
             builder.HasData(new Agent()

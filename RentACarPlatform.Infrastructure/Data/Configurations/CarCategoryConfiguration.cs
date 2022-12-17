@@ -11,6 +11,9 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
             builder.HasData(CreateCarCategories());
         }
 
+        /// <summary>
+        /// Create Car Categories
+        /// </summary>
         private List<CarCategory> CreateCarCategories()
         {
             List<CarCategory> categories = new List<CarCategory>()

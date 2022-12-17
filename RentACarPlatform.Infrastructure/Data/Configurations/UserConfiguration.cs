@@ -16,11 +16,14 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
             builder.HasData(CreateUsers());
         }
 
+        /// <summary>
+        /// Create 2 Users - Agent and Guest
+        /// </summary>      
         private List<ApplicationUser> CreateUsers()
         {
             var users = new List<ApplicationUser>();
             var hasher = new PasswordHasher<ApplicationUser>();
-
+           
             var user = new ApplicationUser()
             {
                 Id = "dea12856-c198-4129-b3f3-b893d8395082",

@@ -11,6 +11,9 @@ namespace RentACarPlatform.Infrastructure.Data.Configurations
             builder.HasData(CreateLocations());
         }
 
+        /// <summary>
+        /// Create Locations 
+        /// </summary>
         private List<Location> CreateLocations()
         {
             List<Location> locations = new List<Location>()

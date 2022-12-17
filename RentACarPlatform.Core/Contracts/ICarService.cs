@@ -2,6 +2,9 @@
 
 namespace RentACarPlatform.Core.Contracts
 {
+    /// <summary>
+    /// Car Service with all methods
+    /// </summary>
     public interface ICarService
     {
         Task<IEnumerable<CarHomeModel>> AllCars();

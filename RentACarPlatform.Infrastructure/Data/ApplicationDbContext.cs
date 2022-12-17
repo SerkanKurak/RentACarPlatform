@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using RentACarPlatform.Infrastructure.Data.Configurations;
 using RentACarPlatform.Infrastructure.Data.Models;
@@ -13,6 +12,9 @@ namespace RentACarPlatform.Infrastructure.Data
         {
         }
 
+        /// <summary>
+        /// Seed informations for entity's
+        /// </summary>         
          protected override void OnModelCreating(ModelBuilder modelBuilder)
          {
                        
@@ -27,6 +29,9 @@ namespace RentACarPlatform.Infrastructure.Data
             base.OnModelCreating(modelBuilder);
         }
 
+        /// <summary>
+        /// Add entity tables to database
+        /// </summary>
         public DbSet<Car> Cars { get; set; } = null!;
        
         public DbSet<Protection> Protections { get; set; } = null!;

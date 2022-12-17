@@ -1,23 +1,43 @@
 ﻿namespace RentACarPlatform.Infrastructure.Data.Constants
 {
+
+    /// <summary>
+    /// All validation constants for database
+    /// </summary>
+
     public static class DataConstants
     {
+        /// <summary>
+        /// Agent entity validation constants
+        /// </summary>
         public static class AgentData
         {
             public const int PhoneNumberMinLength = 7;
             public const int PhoneNumberMaxLength = 15;
         }
 
+
+        /// <summary>
+        /// CarCategory entity validation constant
+        /// </summary>
         public static class CarCategoryData
         {
             public const int NameMaxLength = 10;
         }
 
+
+        /// <summary>
+        /// CarPurpose entity validation constant
+        /// </summary>
         public static class CarPurposeData
         {
             public const int NameMaxLength = 20;
         }
 
+
+        /// <summary>
+        /// Car entity validation constants
+        /// </summary>
         public static class CarData
         {
             public const int MakeMinLength = 2;
@@ -61,14 +81,22 @@
 
 
             public const int MaxImageUrlLenght = 300;
-
         }
 
+
+        /// <summary>
+        /// Location entity validation constant
+        /// </summary>
         public static class LocationData
         {
             public const int NameMaxLength = 30;
         }
 
+
+
+        /// <summary>
+        /// ApplicationUser entity validation constants
+        /// </summary>
         public static class ApplicationUserData
         {
             public const int FirstNameMaxLength = 20;
@@ -78,11 +106,14 @@
             public const int CountryNameMaxLength = 60;
         }
 
+
+
+        /// <summary>
+        /// Protection entity validation constant
+        /// </summary>
         public static class ProtectionData
         {
-            public const int NameMaxLength = 8;
-
-          
+            public const int NameMaxLength = 8;     
         }
     }
 }
